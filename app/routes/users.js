@@ -1,3 +1,6 @@
+const controller = require('../controllers/users')
+const validate = require('../controllers/users.validate')
+const AuthController = require('../controllers/auth')
 const express = require('express')
 const router = express.Router()
 require('../../config/passport')
@@ -6,23 +9,6 @@ const requireAuth = passport.authenticate('jwt', {
   session: false
 })
 const trimRequest = require('trim-request')
-
-const { roleAuthorization } = require('../controllers/auth')
-
-const {
-  getUsers,
-  createUser,
-  getUser,
-  updateUser,
-  deleteUser
-} = require('../controllers/users')
-
-const {
-  validateCreateUser,
-  validateGetUser,
-  validateUpdateUser,
-  validateDeleteUser
-} = require('../controllers/users/validators')
 
 /*
  * Users routes
@@ -34,9 +20,9 @@ const {
 router.get(
   '/',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  getUsers
+  controller.getItems
 )
 
 /*
@@ -45,10 +31,10 @@ router.get(
 router.post(
   '/',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateCreateUser,
-  createUser
+  validate.createItem,
+  controller.createItem
 )
 
 /*
@@ -57,10 +43,10 @@ router.post(
 router.get(
   '/:id',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateGetUser,
-  getUser
+  validate.getItem,
+  controller.getItem
 )
 
 /*
@@ -69,10 +55,10 @@ router.get(
 router.patch(
   '/:id',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateUpdateUser,
-  updateUser
+  validate.updateItem,
+  controller.updateItem
 )
 
 /*
@@ -81,10 +67,10 @@ router.patch(
 router.delete(
   '/:id',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateDeleteUser,
-  deleteUser
+  validate.deleteItem,
+  controller.deleteItem
 )
 
 module.exports = router

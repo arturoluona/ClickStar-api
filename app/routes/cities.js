@@ -1,3 +1,6 @@
+const controller = require('../controllers/cities')
+const validate = require('../controllers/cities.validate')
+const AuthController = require('../controllers/auth')
 const express = require('express')
 const router = express.Router()
 require('../../config/passport')
@@ -7,24 +10,6 @@ const requireAuth = passport.authenticate('jwt', {
 })
 const trimRequest = require('trim-request')
 
-const { roleAuthorization } = require('../controllers/auth')
-
-const {
-  getAllCities,
-  getCities,
-  createCity,
-  getCity,
-  updateCity,
-  deleteCity
-} = require('../controllers/cities')
-
-const {
-  validateCreateCity,
-  validateGetCity,
-  validateUpdateCity,
-  validateDeleteCity
-} = require('../controllers/cities/validators')
-
 /*
  * Cities routes
  */
@@ -32,7 +17,7 @@ const {
 /*
  * Get all items route
  */
-router.get('/all', getAllCities)
+router.get('/all', controller.getAllItems)
 
 /*
  * Get items route
@@ -40,9 +25,9 @@ router.get('/all', getAllCities)
 router.get(
   '/',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  getCities
+  controller.getItems
 )
 
 /*
@@ -51,10 +36,10 @@ router.get(
 router.post(
   '/',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateCreateCity,
-  createCity
+  validate.createItem,
+  controller.createItem
 )
 
 /*
@@ -63,10 +48,10 @@ router.post(
 router.get(
   '/:id',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateGetCity,
-  getCity
+  validate.getItem,
+  controller.getItem
 )
 
 /*
@@ -75,10 +60,10 @@ router.get(
 router.patch(
   '/:id',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateUpdateCity,
-  updateCity
+  validate.updateItem,
+  controller.updateItem
 )
 
 /*
@@ -87,10 +72,10 @@ router.patch(
 router.delete(
   '/:id',
   requireAuth,
-  roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin']),
   trimRequest.all,
-  validateDeleteCity,
-  deleteCity
+  validate.deleteItem,
+  controller.deleteItem
 )
 
 module.exports = router
