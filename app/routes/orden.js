@@ -1,5 +1,5 @@
-const controller = require('../controllers/divicePrinter')
-const validate = require('../controllers/divicePrinter.validate')
+const controller = require('../controllers/orden')
+const validate = require('../controllers/orden.validate')
 const AuthController = require('../controllers/auth')
 const express = require('express')
 const router = express.Router()
@@ -11,7 +11,7 @@ const requireAuth = passport.authenticate('jwt', {
 const trimRequest = require('trim-request')
 
 /*
- * divicePrinter routes
+ * orden routes
  */
 
 /*

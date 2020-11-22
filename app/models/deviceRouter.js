@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
-const diviceRouterSchema = new mongoose.Schema(
+const deviceRouterSchema = new mongoose.Schema(
   {
     model: {
       type: String,
@@ -27,5 +27,5 @@ const diviceRouterSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-diviceRouterSchema.plugin(mongoosePaginate)
-module.exports = mongoose.model('diviceRouter', diviceRouterSchema)
+deviceRouterSchema.plugin(mongoosePaginate)
+module.exports = mongoose.model('deviceRouter', deviceRouterSchema)

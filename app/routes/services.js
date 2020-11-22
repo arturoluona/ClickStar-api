@@ -1,5 +1,5 @@
-const controller = require('../controllers/diviceLaptop')
-const validate = require('../controllers/diviceLaptop.validate')
+const controller = require('../controllers/services')
+const validate = require('../controllers/services.validate')
 const AuthController = require('../controllers/auth')
 const express = require('express')
 const router = express.Router()
@@ -11,7 +11,7 @@ const requireAuth = passport.authenticate('jwt', {
 const trimRequest = require('trim-request')
 
 /*
- * diviceLaptop routes
+ * services routes
  */
 
 /*
@@ -20,7 +20,7 @@ const trimRequest = require('trim-request')
 router.get(
   '/',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office']),
+  AuthController.roleAuthorization(['user', 'admin', 'office', 'tecnico']),
   trimRequest.all,
   controller.getItems
 )
@@ -43,7 +43,7 @@ router.post(
 router.get(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office']),
+  AuthController.roleAuthorization(['user', 'admin', 'office', 'tecnico']),
   trimRequest.all,
   validate.getItem,
   controller.getItem

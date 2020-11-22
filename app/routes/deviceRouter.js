@@ -1,5 +1,5 @@
-const controller = require('../controllers/diviceRouter')
-const validate = require('../controllers/diviceRouter.validate')
+const controller = require('../controllers/deviceRouter')
+const validate = require('../controllers/deviceRouter.validate')
 const AuthController = require('../controllers/auth')
 const express = require('express')
 const router = express.Router()

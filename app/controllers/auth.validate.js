@@ -11,6 +11,12 @@ exports.register = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
+  check('ci')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('email')
     .exists()
     .withMessage('MISSING')

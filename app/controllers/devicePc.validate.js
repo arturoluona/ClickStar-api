@@ -32,6 +32,13 @@ exports.createItem = [
   check('loader').optional(),
   check('description').optional(),
   check('battery').optional(),
+  check('type')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
   (req, res, next) => {
     validationResult(req, res, next)
   }
@@ -56,6 +63,13 @@ exports.updateItem = [
     .withMessage('IS_EMPTY')
     .trim(),
   check('serial')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('type')
     .exists()
     .withMessage('MISSING')
     .not()

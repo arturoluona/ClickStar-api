@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
-const divicePrinterSchema = new mongoose.Schema(
+const deviceOthersSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true
+    },
     model: {
       type: String,
       required: true
@@ -15,12 +19,7 @@ const divicePrinterSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    cabezal: {
-      type: Object
-    },
-    tinta: {
-      type: Object
-    },
+
     description: {
       type: String
     }
@@ -30,5 +29,5 @@ const divicePrinterSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-divicePrinterSchema.plugin(mongoosePaginate)
-module.exports = mongoose.model('divicePrinter', divicePrinterSchema)
+deviceOthersSchema.plugin(mongoosePaginate)
+module.exports = mongoose.model('deviceOthers', deviceOthersSchema)

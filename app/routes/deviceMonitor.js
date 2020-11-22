@@ -1,5 +1,5 @@
-const controller = require('../controllers/diviceCpu')
-const validate = require('../controllers/diviceCpu.validate')
+const controller = require('../controllers/deviceMonitor')
+const validate = require('../controllers/deviceMonitor.validate')
 const AuthController = require('../controllers/auth')
 const express = require('express')
 const router = express.Router()
@@ -11,7 +11,7 @@ const requireAuth = passport.authenticate('jwt', {
 const trimRequest = require('trim-request')
 
 /*
- * diviceCpu routes
+ * diviceMonitor routes
  */
 
 /*

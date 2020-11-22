@@ -1,7 +1,8 @@
-const model = require('../models/diviceMonitor')
+const model = require('../models/deviceMonitor')
 const { matchedData } = require('express-validator')
 const utils = require('../middleware/utils')
 const db = require('../middleware/db')
+const serviceDevice = require('../services/devices')
 
 /********************
  * Public functions *
@@ -30,7 +31,7 @@ exports.getItem = async (req, res) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.getItem(id, model))
+    res.status(200).json(await serviceDevice.getItem(id, model))
   } catch (error) {
     utils.handleError(res, error)
   }

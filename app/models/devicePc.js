@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
-const diviceCpuSchema = new mongoose.Schema(
+const deviceLaptopSchema = new mongoose.Schema(
   {
     model: {
       type: String,
@@ -10,6 +10,11 @@ const diviceCpuSchema = new mongoose.Schema(
     make: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      required: true,
+      enum: ['laptop', 'cpu']
     },
     serial: {
       type: String,
@@ -24,6 +29,12 @@ const diviceCpuSchema = new mongoose.Schema(
     processor: {
       type: Object
     },
+    loader: {
+      type: Object
+    },
+    battery: {
+      type: Object
+    },
     description: {
       type: String
     }
@@ -33,5 +44,5 @@ const diviceCpuSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-diviceCpuSchema.plugin(mongoosePaginate)
-module.exports = mongoose.model('diviceCpu', diviceCpuSchema)
+deviceLaptopSchema.plugin(mongoosePaginate)
+module.exports = mongoose.model('deviceLaptop', deviceLaptopSchema)

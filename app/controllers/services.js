@@ -1,4 +1,4 @@
-const model = require('../models/divicePrinter')
+const model = require('../models/services')
 const { matchedData } = require('express-validator')
 const utils = require('../middleware/utils')
 const db = require('../middleware/db')

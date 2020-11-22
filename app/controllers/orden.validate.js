@@ -10,8 +10,32 @@ exports.createItem = [
     .withMessage('MISSING')
     .not()
     .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('price')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('status')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('description')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
+  check('devices')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   (req, res, next) => {
     validationResult(req, res, next)
   }
@@ -22,6 +46,31 @@ exports.createItem = [
  */
 exports.updateItem = [
   check('name')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('price')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('status')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('description')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('devices')
     .exists()
     .withMessage('MISSING')
     .not()

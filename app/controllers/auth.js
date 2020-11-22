@@ -46,6 +46,7 @@ const setUserInfo = (req) => {
   let user = {
     _id: req._id,
     name: req.name,
+    ci: req.ci,
     email: req.email,
     role: req.role,
     verified: req.verified
@@ -223,6 +224,7 @@ const registerUser = async (req) => {
   return new Promise((resolve, reject) => {
     const user = new User({
       name: req.name,
+      ci: req.ci,
       email: req.email,
       password: req.password,
       verification: uuid.v4()

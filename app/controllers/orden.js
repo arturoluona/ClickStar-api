@@ -1,7 +1,8 @@
-const model = require('../models/diviceRouter')
+const model = require('../models/orden')
 const { matchedData } = require('express-validator')
 const utils = require('../middleware/utils')
 const db = require('../middleware/db')
+const serviceOrder = require('../services/orden')
 
 /********************
  * Public functions *
@@ -30,7 +31,7 @@ exports.getItem = async (req, res) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.getItem(id, model))
+    res.status(200).json(await serviceOrder.getItem(id, model))
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -58,7 +59,6 @@ exports.updateItem = async (req, res) => {
  */
 exports.createItem = async (req, res) => {
   try {
-    console.log('entraaaaaaa')
     req = matchedData(req)
     res.status(201).json(await db.createItem(req, model))
   } catch (error) {
