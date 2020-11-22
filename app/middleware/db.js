@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 const {
   buildSuccObject,
   buildErrObject,
@@ -83,6 +85,48 @@ module.exports = {
         console.log(err.message)
         reject(buildErrObject(422, 'ERROR_WITH_FILTER'))
       }
+    })
+  },
+
+  /**
+   * If user is admin search all ordenes with devices
+   * If user is user search all ordenes by tecnico with devices
+   * @param {Object} dataUser - query object
+   * @param {Object} query - query object
+   */
+  getItemsOrdenByUser(model, query = {}, dataUser) {
+    if (dataUser.role === 'tecnico') {
+      query = {
+        ...query,
+        ...{
+          $and: [
+            { 'tecnico': mongoose.Types.ObjectId(dataUser._id) }
+          ]
+        }
+      }
+    }
+    return model.aggregate([
+      {
+        $match: query
+      }
+    ])
+  },
+
+  /**
+   * Gets items from database
+   * @param {Object} req - request object
+   * @param model
+   * @param aggregate
+   */
+  async getItemsAggregate(req, model, aggregate) {
+    const options = await listInitOptions(req)
+    return new Promise((resolve, reject) => {
+      model.aggregatePaginate(aggregate, options, (err, items) => {
+        if (err) {
+          reject(buildErrObject(422, err.message))
+        }
+        resolve(cleanPaginationID(items))
+      })
     })
   },
 

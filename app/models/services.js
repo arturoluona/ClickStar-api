@@ -10,14 +10,7 @@ const servicesSchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: [
-        'laptop',
-        'cpu',
-        'impresora',
-        'modem/router',
-        'monitor',
-        'otros'
-      ]
+      enum: ['laptop', 'cpu', 'impresora', 'modem/router', 'monitor', 'otros']
     },
     description: {
       type: String,

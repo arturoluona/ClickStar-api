@@ -1,14 +1,11 @@
 const mongoose = require('mongoose')
-const mongoosePaginate = require('mongoose-paginate-v2')
 const nano = require('nanoid/non-secure')
+const aggregatePaginate = require('mongoose-aggregate-paginate-v2')
 
 const HistoricSchema = new mongoose.Schema({
   status: {
     type: String,
     require: true
-  },
-  description: {
-    type: String
   },
   date: {
     type: Date,
@@ -19,7 +16,11 @@ const HistoricSchema = new mongoose.Schema({
 
 const ordenSchema = new mongoose.Schema(
   {
-    user: {
+    customer: {
+      type: mongoose.Schema.ObjectId,
+      required: true
+    },
+    tecnico: {
       type: mongoose.Schema.ObjectId,
       required: true
     },
@@ -31,16 +32,13 @@ const ordenSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      enum: [
-        'wait',
-        'process',
-        'completed',
-        'delivered',
-        'cancelado'
-      ]
+      enum: ['wait', 'process', 'completed', 'delivered', 'cancelado']
     },
-    devices: {  // 
-      type: Array,
+    device: {
+      type: {
+        _id: { type: String },
+        label: { type: Object }
+      },
       required: true
     },
     description: {
@@ -59,5 +57,6 @@ const ordenSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-ordenSchema.plugin(mongoosePaginate)
+
+ordenSchema.plugin(aggregatePaginate)
 module.exports = mongoose.model('orden', ordenSchema)

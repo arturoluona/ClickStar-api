@@ -3,41 +3,56 @@
 const _ = require('lodash')
 const mongoose = require('mongoose')
 
-exports.getItem = (id, model) => new Promise((resolve, reject) => {
-  try {
-    const aggregate = [
-      {
-        $match: {
-          $and: [
-            { _id: mongoose.Types.ObjectId(id) }
-          ]
-        }
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: { idOrden: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $and: [{ $eq: ['$$idOrden', '$_id'] }]
+exports.getItem = (id, model) =>
+  new Promise((resolve, reject) => {
+    try {
+      const aggregate = [
+        {
+          $match: {
+            $and: [{ _id: mongoose.Types.ObjectId(id) }]
+          }
+        },
+        {
+          $lookup: {
+            from: 'users',
+            let: { idUser: '$customer' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [{ $eq: ['$$idUser', '$_id'] }]
+                  }
                 }
               }
-            }
-          ],
-          as: 'user'
+            ],
+            as: 'customer'
+          }
+        },
+        {
+          $lookup: {
+            from: 'users',
+            let: { idUser: '$tecnico' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [{ $eq: ['$$idUser', '$_id'] }]
+                  }
+                }
+              }
+            ],
+            as: 'tecnico'
+          }
         }
-      }
-    ]
+      ]
 
-    model.aggregate(aggregate, (err, res) => {
-      if (err) {
-        reject(err)
-      }
-      resolve(_.head(res))
-    })
-  } catch (e) {
-    reject(e)
-  }
-})
+      model.aggregate(aggregate, (err, res) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(_.head(res))
+      })
+    } catch (e) {
+      reject(e)
+    }
+  })
