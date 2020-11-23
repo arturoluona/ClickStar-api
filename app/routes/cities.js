@@ -13,7 +13,7 @@ const trimRequest = require('trim-request')
 /*
  * Cities routes
  */
-
+ 
 /*
  * Get all items route
  */
