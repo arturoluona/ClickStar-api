@@ -5,13 +5,29 @@ const { check } = require('express-validator')
  * Validates create new item request
  */
 exports.createItem = [
-  check('name')
+  check('model')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
+  check('make')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('serial')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('loader').optional(),
+  check('description').optional(),
   (req, res, next) => {
     validationResult(req, res, next)
   }
@@ -21,12 +37,29 @@ exports.createItem = [
  * Validates update item request
  */
 exports.updateItem = [
-  check('name')
+  check('model')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
-    .withMessage('IS_EMPTY'),
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('make')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('serial')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('loader').optional(),
+  check('description').optional(),
   check('id')
     .exists()
     .withMessage('MISSING')

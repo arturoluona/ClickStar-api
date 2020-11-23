@@ -1,6 +1,7 @@
-const controller = require('../controllers/users')
-const validate = require('../controllers/users.validate')
+const controller = require('../controllers/deviceMonitor')
+const validate = require('../controllers/deviceMonitor.validate')
 const AuthController = require('../controllers/auth')
+const db = require('../middleware/db')
 const express = require('express')
 const router = express.Router()
 require('../../config/passport')
@@ -11,7 +12,7 @@ const requireAuth = passport.authenticate('jwt', {
 const trimRequest = require('trim-request')
 
 /*
- * Users routes
+ * diviceMonitor routes
  */
 
 /*
@@ -20,9 +21,10 @@ const trimRequest = require('trim-request')
 router.get(
   '/',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office']),
+  AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
-  controller.getItems
+  controller.getItems,
+  db.auditoriaMethods
 )
 
 /*
@@ -43,10 +45,11 @@ router.post(
 router.get(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office']),
+  AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
   validate.getItem,
-  controller.getItem
+  controller.getItem,
+  db.auditoriaMethods
 )
 
 /*
@@ -67,7 +70,7 @@ router.patch(
 router.delete(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.deleteItem,
   controller.deleteItem

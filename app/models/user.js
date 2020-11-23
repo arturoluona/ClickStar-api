@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    ci: {
+      type: String,
+      required: true
+    },
     email: {
       type: String,
       validate: {
@@ -26,7 +30,7 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'office', 'tecnico'],
       default: 'user'
     },
     verification: {
@@ -44,26 +48,6 @@ const UserSchema = new mongoose.Schema(
     },
     country: {
       type: String
-    },
-    urlTwitter: {
-      type: String,
-      validate: {
-        validator(v) {
-          return v === '' ? true : validator.isURL(v)
-        },
-        message: 'NOT_A_VALID_URL'
-      },
-      lowercase: true
-    },
-    urlGitHub: {
-      type: String,
-      validate: {
-        validator(v) {
-          return v === '' ? true : validator.isURL(v)
-        },
-        message: 'NOT_A_VALID_URL'
-      },
-      lowercase: true
     },
     loginAttempts: {
       type: Number,

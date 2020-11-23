@@ -1,3 +1,7 @@
+const mongoose = require('mongoose')
+const { matchedData } = require('express-validator')
+const auditoriaMethod = require('../models/auditriaMethods')
+
 const {
   buildSuccObject,
   buildErrObject,
@@ -83,6 +87,69 @@ module.exports = {
         console.log(err.message)
         reject(buildErrObject(422, 'ERROR_WITH_FILTER'))
       }
+    })
+  },
+
+  /**
+   * Auditar las consultas
+   * @param {Object} req - query object
+   */
+  async auditoriaMethods(req) {
+    try {
+      const send = {
+        user: (req.user) ? req.user : 'sin usuario',
+        method: req.method,
+        rute: req.originalUrl,
+      }
+      req = matchedData(req)
+      send.id = (req.id) ? req.id : 'global'
+      auditoriaMethod.create(send, (err, item) => {
+        if (err) {
+          console.log(err.message)
+        }
+      })
+    } catch (err) {
+      console.log(err.message)
+    }
+  },
+
+  /**
+   * If user is admin search all ordenes with devices
+   * If user is user search all ordenes by tecnico with devices
+   * @param {Object} dataUser - query object
+   * @param {Object} query - query object
+   */
+  getItemsOrdenByUser(model, query = {}, dataUser) {
+    if (dataUser.role === 'tecnico') {
+      query = {
+        ...query,
+        ...{
+          $and: [{ tecnico: mongoose.Types.ObjectId(dataUser._id) }]
+        }
+      }
+    }
+    return model.aggregate([
+      {
+        $match: query
+      }
+    ])
+  },
+
+  /**
+   * Gets items from database
+   * @param {Object} req - request object
+   * @param model
+   * @param aggregate
+   */
+  async getItemsAggregate(req, model, aggregate) {
+    const options = await listInitOptions(req)
+    return new Promise((resolve, reject) => {
+      model.aggregatePaginate(aggregate, options, (err, items) => {
+        if (err) {
+          reject(buildErrObject(422, err.message))
+        }
+        resolve(cleanPaginationID(items))
+      })
     })
   },
 

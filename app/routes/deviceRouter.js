@@ -1,5 +1,5 @@
-const controller = require('../controllers/cities')
-const validate = require('../controllers/cities.validate')
+const controller = require('../controllers/deviceRouter')
+const validate = require('../controllers/deviceRouter.validate')
 const AuthController = require('../controllers/auth')
 const express = require('express')
 const router = express.Router()
@@ -11,13 +11,8 @@ const requireAuth = passport.authenticate('jwt', {
 const trimRequest = require('trim-request')
 
 /*
- * Cities routes
+ * diviceRouter routes
  */
- 
-/*
- * Get all items route
- */
-router.get('/all', controller.getAllItems)
 
 /*
  * Get items route
@@ -25,7 +20,7 @@ router.get('/all', controller.getAllItems)
 router.get(
   '/',
   requireAuth,
-  AuthController.roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
   controller.getItems
 )
@@ -36,7 +31,7 @@ router.get(
 router.post(
   '/',
   requireAuth,
-  AuthController.roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.createItem,
   controller.createItem
@@ -48,7 +43,7 @@ router.post(
 router.get(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
   validate.getItem,
   controller.getItem
@@ -60,7 +55,7 @@ router.get(
 router.patch(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.updateItem,
   controller.updateItem
@@ -72,7 +67,7 @@ router.patch(
 router.delete(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.deleteItem,
   controller.deleteItem
