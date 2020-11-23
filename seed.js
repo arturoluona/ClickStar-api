@@ -6,6 +6,7 @@ const config = {
   inputPath: path.resolve(__dirname, './data'),
   dropDatabase: false
 }
+console.log(config)
 const seeder = new Seeder(config)
 const collections = seeder.readCollectionsFromPath(path.resolve('./data'))
 

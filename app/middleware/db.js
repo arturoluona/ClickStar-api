@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const { matchedData } = require('express-validator')
+const auditoriaMethod = require('../models/auditriaMethods')
 
 const {
   buildSuccObject,
@@ -89,6 +91,29 @@ module.exports = {
   },
 
   /**
+   * Auditar las consultas
+   * @param {Object} req - query object
+   */
+  async auditoriaMethods(req) {
+    try {
+      const send = {
+        user: (req.user) ? req.user : 'sin usuario',
+        method: req.method,
+        rute: req.originalUrl,
+      }
+      req = matchedData(req)
+      send.id = (req.id) ? req.id : 'global'
+      auditoriaMethod.create(send, (err, item) => {
+        if (err) {
+          console.log(err.message)
+        }
+      })
+    } catch (err) {
+      console.log(err.message)
+    }
+  },
+
+  /**
    * If user is admin search all ordenes with devices
    * If user is user search all ordenes by tecnico with devices
    * @param {Object} dataUser - query object
@@ -99,9 +124,7 @@ module.exports = {
       query = {
         ...query,
         ...{
-          $and: [
-            { 'tecnico': mongoose.Types.ObjectId(dataUser._id) }
-          ]
+          $and: [{ tecnico: mongoose.Types.ObjectId(dataUser._id) }]
         }
       }
     }

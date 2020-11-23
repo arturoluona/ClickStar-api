@@ -33,7 +33,7 @@ exports.getItem = async (req, res) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    let response = await serviceOrder.getItem(id, model)
+    const response = await serviceOrder.getItem(id, model)
     response.customer = {
       name: response.customer[0].name,
       email: response.customer[0].email,
@@ -91,7 +91,7 @@ exports.createItem = async (req, res) => {
       _id: new mongoose.Types.ObjectId(req.device._id),
       label: req.device
     }
-    res.status(201).json( await db.createItem(req, model))//
+    res.status(201).json(await db.createItem(req, model)) //
   } catch (error) {
     utils.handleError(res, error)
   }

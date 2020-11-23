@@ -56,7 +56,7 @@ exports.updateItem = [
     .withMessage('MISSING')
     .not()
     .isEmpty()
-    .withMessage('IS_EMPTY'),  
+    .withMessage('IS_EMPTY'),
   check('tecnico')
     .exists()
     .withMessage('MISSING')

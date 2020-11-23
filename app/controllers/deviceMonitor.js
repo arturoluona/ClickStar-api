@@ -13,10 +13,11 @@ const serviceDevice = require('../services/devices')
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getItems = async (req, res) => {
+exports.getItems = async (req, res, next) => {
   try {
     const query = await db.checkQueryString(req.query)
     res.status(200).json(await db.getItems(req, model, query))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -27,11 +28,12 @@ exports.getItems = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getItem = async (req, res) => {
+exports.getItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await serviceDevice.getItem(id, model))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -59,7 +61,6 @@ exports.updateItem = async (req, res) => {
  */
 exports.createItem = async (req, res) => {
   try {
-    console.log('entraaaaaaa')
     req = matchedData(req)
     res.status(201).json(await db.createItem(req, model))
   } catch (error) {

@@ -1,6 +1,7 @@
 const controller = require('../controllers/deviceMonitor')
 const validate = require('../controllers/deviceMonitor.validate')
 const AuthController = require('../controllers/auth')
+const db = require('../middleware/db')
 const express = require('express')
 const router = express.Router()
 require('../../config/passport')
@@ -22,7 +23,8 @@ router.get(
   requireAuth,
   AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
-  controller.getItems
+  controller.getItems,
+  db.auditoriaMethods
 )
 
 /*
@@ -46,7 +48,8 @@ router.get(
   AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
   validate.getItem,
-  controller.getItem
+  controller.getItem,
+  db.auditoriaMethods
 )
 
 /*
