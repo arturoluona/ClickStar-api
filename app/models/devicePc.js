@@ -30,10 +30,10 @@ const deviceLaptopSchema = new mongoose.Schema(
       type: Object
     },
     loader: {
-      type: Object
+      type: String
     },
     battery: {
-      type: Object
+      type: String
     },
     description: {
       type: String

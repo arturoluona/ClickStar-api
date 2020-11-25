@@ -54,10 +54,11 @@ const createItem = async (req) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getItems = async (req, res) => {
+exports.getItems = async (req, res, next) => {
   try {
     const query = await db.checkQueryString(req.query)
     res.status(200).json(await db.getItems(req, model, query))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -68,11 +69,12 @@ exports.getItems = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getItem = async (req, res) => {
+exports.getItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.getItem(id, model))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -83,7 +85,7 @@ exports.getItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.updateItem = async (req, res) => {
+exports.updateItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
@@ -94,6 +96,7 @@ exports.updateItem = async (req, res) => {
     if (!doesEmailExists) {
       res.status(200).json(await db.updateItem(id, model, req))
     }
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -104,7 +107,7 @@ exports.updateItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.createItem = async (req, res) => {
+exports.createItem = async (req, res, next) => {
   try {
     // Gets locale from header 'Accept-Language'
     const locale = req.getLocale()
@@ -115,6 +118,7 @@ exports.createItem = async (req, res) => {
       emailer.sendRegistrationEmailMessage(locale, item)
       res.status(201).json(item)
     }
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -125,11 +129,12 @@ exports.createItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.deleteItem = async (req, res) => {
+exports.deleteItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.deleteItem(id, model))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }

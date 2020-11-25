@@ -1,6 +1,7 @@
 const controller = require('../controllers/profile')
 const validate = require('../controllers/profile.validate')
 const AuthController = require('../controllers/auth')
+const db = require('../middleware/db')
 const express = require('express')
 const router = express.Router()
 require('../../config/passport')
@@ -22,7 +23,8 @@ router.get(
   requireAuth,
   AuthController.roleAuthorization(['user', 'admin']),
   trimRequest.all,
-  controller.getProfile
+  controller.getProfile,
+  db.auditoriaMethods
 )
 
 /*
@@ -34,7 +36,8 @@ router.patch(
   AuthController.roleAuthorization(['user', 'admin']),
   trimRequest.all,
   validate.updateProfile,
-  controller.updateProfile
+  controller.updateProfile,
+  db.auditoriaMethods
 )
 
 /*
@@ -46,7 +49,8 @@ router.post(
   AuthController.roleAuthorization(['user', 'admin']),
   trimRequest.all,
   validate.changePassword,
-  controller.changePassword
+  controller.changePassword,
+  db.auditoriaMethods
 )
 
 module.exports = router

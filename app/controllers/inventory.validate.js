@@ -1,5 +1,4 @@
 const { validationResult } = require('../middleware/utils')
-const validator = require('validator')
 const { check } = require('express-validator')
 
 /**
@@ -11,52 +10,30 @@ exports.createItem = [
     .withMessage('MISSING')
     .not()
     .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('email')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
     .withMessage('IS_EMPTY')
-    .isEmail()
-    .withMessage('EMAIL_IS_NOT_VALID'),
-  check('ci')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('password')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY')
-    .isLength({
-      min: 5
-    })
-    .withMessage('PASSWORD_TOO_SHORT_MIN_5'),
-  check('role')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('phone')
+    .trim(),
+  check('stock')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('city')
+  check('Description')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('country')
+  check('proveedor')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('price')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -77,48 +54,36 @@ exports.updateItem = [
     .withMessage('MISSING')
     .not()
     .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('email')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('role')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('phone')
+    .withMessage('IS_EMPTY')
+    .trim(),
+  check('stock')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('city')
+  check('Description')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('country')
+  check('proveedor')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('urlTwitter')
-    .optional()
-    .custom((v) => (v === '' ? true : validator.isURL(v)))
-    .withMessage('NOT_A_VALID_URL'),
-  check('urlGitHub')
-    .optional()
-    .custom((v) => (v === '' ? true : validator.isURL(v)))
-    .withMessage('NOT_A_VALID_URL'),
+  check('price')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY')
+    .trim(),
   check('id')
     .exists()
     .withMessage('MISSING')

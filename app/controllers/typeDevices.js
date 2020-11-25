@@ -1,10 +1,7 @@
-const model = require('../models/orden')
+const model = require('../models/typeDevice')
 const { matchedData } = require('express-validator')
 const utils = require('../middleware/utils')
 const db = require('../middleware/db')
-const serviceOrder = require('../services/orden')
-const mongoose = require('mongoose')
-
 /********************
  * Public functions *
  ********************/
@@ -17,8 +14,7 @@ const mongoose = require('mongoose')
 exports.getItems = async (req, res, next) => {
   try {
     const query = await db.checkQueryString(req.query)
-    const aggregation = db.getItemsOrdenByUser(model, query, req.user)
-    res.status(200).json(await db.getItemsAggregate(req, model, aggregation))
+    res.status(200).json(await db.getItems(req, model, query))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -34,22 +30,7 @@ exports.getItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    const response = await serviceOrder.getItem(id, model)
-    response.customer = {
-      name: response.customer[0].name,
-      email: response.customer[0].email,
-      phone: response.customer[0].phone,
-      ci: response.customer[0].ci,
-      role: response.customer[0].role
-    }
-    response.tecnico = {
-      name: response.tecnico[0].name,
-      email: response.tecnico[0].email,
-      phone: response.tecnico[0].phone,
-      ci: response.tecnico[0].ci,
-      role: response.tecnico[0].role
-    }
-    res.status(200).json(response)
+    res.status(200).json(await db.getItem(id, model))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -64,13 +45,6 @@ exports.getItem = async (req, res, next) => {
 exports.updateItem = async (req, res, next) => {
   try {
     req = matchedData(req)
-    req.historic = {
-      status: req.status
-    }
-    req.device = {
-      _id: new mongoose.Types.ObjectId(req.device._id),
-      label: req.device
-    }
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.updateItem(id, model, req))
     next()
@@ -87,14 +61,7 @@ exports.updateItem = async (req, res, next) => {
 exports.createItem = async (req, res, next) => {
   try {
     req = matchedData(req)
-    req.historic = {
-      status: req.status
-    }
-    req.device = {
-      _id: new mongoose.Types.ObjectId(req.device._id),
-      label: req.device
-    }
-    res.status(201).json(await db.createItem(req, model)) //
+    res.status(201).json(await db.createItem(req, model))
     next()
   } catch (error) {
     utils.handleError(res, error)

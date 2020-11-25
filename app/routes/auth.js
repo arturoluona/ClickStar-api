@@ -2,6 +2,7 @@ const controller = require('../controllers/auth')
 const validate = require('../controllers/auth.validate')
 const AuthController = require('../controllers/auth')
 const express = require('express')
+const db = require('../middleware/db')
 const router = express.Router()
 require('../../config/passport')
 const passport = require('passport')
@@ -21,7 +22,8 @@ router.post(
   '/register',
   trimRequest.all,
   validate.register,
-  controller.register
+  controller.register,
+  db.auditoriaMethods
 )
 
 /*
@@ -36,7 +38,8 @@ router.post(
   '/forgot',
   trimRequest.all,
   validate.forgotPassword,
-  controller.forgotPassword
+  controller.forgotPassword,
+  db.auditoriaMethods
 )
 
 /*
@@ -46,7 +49,8 @@ router.post(
   '/reset',
   trimRequest.all,
   validate.resetPassword,
-  controller.resetPassword
+  controller.resetPassword,
+  db.auditoriaMethods
 )
 
 /*
@@ -57,12 +61,19 @@ router.get(
   requireAuth,
   AuthController.roleAuthorization(['user', 'admin']),
   trimRequest.all,
-  controller.getRefreshToken
+  controller.getRefreshToken,
+  db.auditoriaMethods
 )
 
 /*
  * Login route
  */
-router.post('/login', trimRequest.all, validate.login, controller.login)
+router.post(
+  '/login', 
+  trimRequest.all, 
+  validate.login, 
+  controller.login,
+  db.auditoriaMethods
+)
 
 module.exports = router

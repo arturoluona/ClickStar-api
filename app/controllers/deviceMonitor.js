@@ -44,11 +44,12 @@ exports.getItem = async (req, res, next) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.updateItem = async (req, res) => {
+exports.updateItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.updateItem(id, model, req))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -59,10 +60,11 @@ exports.updateItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.createItem = async (req, res) => {
+exports.createItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     res.status(201).json(await db.createItem(req, model))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -73,11 +75,12 @@ exports.createItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.deleteItem = async (req, res) => {
+exports.deleteItem = async (req, res, next) => {
   try {
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.deleteItem(id, model))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
