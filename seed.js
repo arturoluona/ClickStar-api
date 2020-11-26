@@ -7,7 +7,7 @@ const config = {
   dropDatabase: false,  
   databaseReconnectTimeout: 100000,
 }
-console.log(config)
+
 const seeder = new Seeder(config)
 const collections = seeder.readCollectionsFromPath(path.resolve('./data'))
 

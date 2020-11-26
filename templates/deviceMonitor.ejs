@@ -8,8 +8,26 @@
 <body>
     <h2 style="text-align: center;">Dispositivo Monitor</h2>
 
-    <p>
-        <%= JSON.stringify(data) %>
+    <p style="
+        background-color: aqua;
+        padding: 2rem;
+        height: 3em;
+        width: 30em;
+        border-radius: 2em;
+    ">
+        Serial: <%= data.serial %>
     </p>
+
+    <ul>
+        <% for(var i=0; i<data.orden.length; i++) { %>
+            <li>
+               Cliente <%= data.orden[i].customer[0].name %>
+            </li>
+            <li>
+               Tecnico <%= data.orden[i].tecnico[0].name %>
+            </li>
+        <% } %>
+
+    </ul>
 </body>
 </html>

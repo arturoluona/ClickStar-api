@@ -3,6 +3,7 @@ const ObjectID = require('mongodb').ObjectID
 
 module.exports = [
   {
+    _id:  new ObjectID('5fbf0d49ac8acb22ec043a82'),
     ram: [
       {
         version: 'DDR3',
@@ -39,6 +40,7 @@ module.exports = [
     updatedAt: faker.date.recent()
   },
   {
+    _id:  new ObjectID('5fbf0d49ac8acb22bc043b52'),
     ram: [
       {
         version: 'DDR3',

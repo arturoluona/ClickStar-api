@@ -20,7 +20,7 @@ module.exports = [
     tinta: [
       'Azul', 'Amarillo', 'Rojo', 'negro'
     ],
-    model: 'Epson l210',
+    model: 'Epson tx111',
     make: 'EPSON',
     serial: 'asdfghqwert34567xcvb',
     cabezal: 'gvybuyb',

@@ -12,7 +12,7 @@ module.exports = [
     verified: true,
     verification: '3d6e072c-0eaf-4239-bb5e-495e6486148f',
     city: 'Bucaramanga',
-    country: 'Colombia',
+    country: faker.address.streetAddress(true),
     phone: '123123',
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
@@ -27,7 +27,22 @@ module.exports = [
     verified: true,
     verification: '3d6e072c-0eaf-4239-bb5e-495e6486148d',
     city: 'Bucaramanga',
-    country: 'Colombia',
+    country: faker.address.streetAddress(true),
+    phone: '123123',
+    createdAt: faker.date.past(),
+    updatedAt: faker.date.recent()
+  },
+  {
+    _id: new ObjectID('5aa1c2c35ef7a4e97b5e998b'),
+    name: 'Customer user 2',
+    ci: '1010101010',
+    email: 'user1@user.com',
+    password: '$2a$05$2KOSBnbb0r.0TmMrvefbluTOB735rF/KRZb4pmda4PdvU9iDvUB26',
+    role: 'user',
+    verified: true,
+    verification: '3d6e072c-0eaf-4239-bb5e-495e6486148d',
+    city: 'Bucaramanga',
+    country: faker.address.streetAddress(true),
     phone: '123123',
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
@@ -42,7 +57,7 @@ module.exports = [
     verified: true,
     verification: '3d6e072c-0eaf-4239-bb5e-495e6486148d',
     city: 'Bucaramanga',
-    country: 'Colombia',
+    country: faker.address.streetAddress(true),
     phone: '123123',
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
@@ -57,7 +72,7 @@ module.exports = [
     verified: true,
     verification: '3d6e072c-0eaf-4239-bb5e-495e6486148d',
     city: 'Bucaramanga',
-    country: 'Colombia',
+    country: faker.address.streetAddress(true),
     phone: '123123',
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()

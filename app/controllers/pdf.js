@@ -68,6 +68,7 @@ exports.auditoriaGlobal = async (req, res) => {
         }
       });
     })
+    options.orientation = 'portrait'
   } catch (error) {
     utils.handleError(res, error)
   }
