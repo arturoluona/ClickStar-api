@@ -33,10 +33,10 @@ module.exports = [
     updatedAt: faker.date.recent()
   },
   {
-    _id: new ObjectID('5aa1c2c35ef7a4e97b5e995b'),
+    _id: new ObjectID('5aa1c2c35ef7a4e97b5e995c'),
     name: 'Tecnico user',
     ci: '33333333',
-    email: 'user@user.com',
+    email: 'tecnico@tecnico.com',
     password: '$2a$05$2KOSBnbb0r.0TmMrvefbluTOB735rF/KRZb4pmda4PdvU9iDvUB26',
     role: 'tecnico',
     verified: true,
@@ -48,10 +48,10 @@ module.exports = [
     updatedAt: faker.date.recent()
   },
   {
-    _id: new ObjectID('5aa1c2c35ef7a4e97b5e995b'),
+    _id: new ObjectID('5aa1c2c35ef7a4e97b5e995d'),
     name: 'Office user',
     ci: '44444444',
-    email: 'user@user.com',
+    email: 'office@office.com',
     password: '$2a$05$2KOSBnbb0r.0TmMrvefbluTOB735rF/KRZb4pmda4PdvU9iDvUB26',
     role: 'office',
     verified: true,

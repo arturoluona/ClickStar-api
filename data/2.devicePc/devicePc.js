@@ -3,91 +3,74 @@ const ObjectID = require('mongodb').ObjectID
 
 module.exports = [
   {
-    _id: new ObjectID('5aa1c2c35ef7a4e97b5a995b'),
-    model: faker.commerce.productName(),
-    make: faker.commerce.productMaterial(),
+    ram: [
+      {
+        version: 'DDR3',
+        capacity: '1GB',
+        serial: faker.random.alphaNumeric(9)
+      },
+      {
+        version: 'DDR3',
+        capacity: '1GB',
+        serial: faker.random.alphaNumeric(9)
+      }
+    ],
+    model: faker.random.words(5),
+    make: faker.company.companyName(5),
+    serial: faker.random.uuid(),
+    hdd: [
+      {
+        model: 'IDE',
+        capacity: '500GB',
+        serial: faker.random.alphaNumeric(9)
+      }
+    ],
+    processor: {
+        cache: '2.5GHz',
+        model: 'i5',
+        make: 'Intel',
+        serial: faker.random.alphaNumeric(9)
+    },
+    loader: faker.random.alphaNumeric(9),
+    description: faker.lorem.text(15),
+    battery: faker.random.alphaNumeric(9),
     type: 'laptop',
-    serial: faker.random.uuid(),
-    ram: [
-      {
-        version: '1.1',
-        capacity: '2GB',
-        serial: faker.random.uuid()
-      }
-    ],
-    hdd: [
-      {
-        serial: faker.random.uuid(),
-        capacity: '250GB'
-      }
-    ],
-    processor: {
-      cache: '2.5GHz',
-      make: faker.commerce.productMaterial(),
-      model: faker.commerce.productName(),
-      serial: faker.random.uuid()
-    },
-    loader: { serial: faker.random.uuid() },
-    battery: { serial: faker.random.uuid() },
-    description: faker.lorem.text(15),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
   },
   {
-    _id: new ObjectID('5aa1c2c35ef7a4e97b5b995b'),
-    model: faker.commerce.productName(),
-    make: faker.commerce.productMaterial(),
-    type: 'cpu',
-    serial: faker.random.uuid(),
     ram: [
       {
-        version: '1.1',
-        capacity: '2GB',
-        serial: faker.random.uuid()
+        version: 'DDR3',
+        capacity: '1GB',
+        serial: faker.random.alphaNumeric(9)
+      },
+      {
+        version: 'DDR3',
+        capacity: '1GB',
+        serial: faker.random.alphaNumeric(9)
       }
     ],
+    model: faker.random.words(5),
+    make: faker.company.companyName(5),
+    serial: faker.random.uuid(),
     hdd: [
       {
-        serial: faker.random.uuid(),
-        capacity: '250GB'
+        model: 'IDE',
+        capacity: '500GB',
+        serial: faker.random.alphaNumeric(9)
       }
     ],
     processor: {
-      cache: '2.5GHz',
-      make: faker.commerce.productMaterial(),
-      model: faker.commerce.productName(),
-      serial: faker.random.uuid()
+        cache: '2.5GHz',
+        model: 'i5',
+        make: 'Intel',
+        serial: faker.random.alphaNumeric(9)
     },
+    loader: faker.random.alphaNumeric(9),
     description: faker.lorem.text(15),
-    createdAt: faker.date.past(),
-    updatedAt: faker.date.recent()
-  },
-  {
-    _id: new ObjectID('5aa1c2c35ef7a4e97c5b995b'),
-    model: faker.commerce.productName(),
-    make: faker.commerce.productMaterial(),
+    battery: faker.random.alphaNumeric(9),
     type: 'cpu',
-    serial: faker.random.uuid(),
-    ram: [
-      {
-        version: '1.1',
-        capacity: '2GB',
-        serial: faker.random.uuid()
-      }
-    ],
-    hdd: [
-      {
-        serial: faker.random.uuid(),
-        capacity: '250GB'
-      }
-    ],
-    processor: {
-      cache: '2.5GHz',
-      make: faker.commerce.productMaterial(),
-      model: faker.commerce.productName(),
-      serial: faker.random.uuid()
-    },
-    description: faker.lorem.text(15),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
   }

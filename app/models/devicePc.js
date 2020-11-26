@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
-const deviceLaptopSchema = new mongoose.Schema(
+const devicePcSchema = new mongoose.Schema(
   {
     model: {
       type: String,
@@ -44,5 +44,5 @@ const deviceLaptopSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-deviceLaptopSchema.plugin(mongoosePaginate)
-module.exports = mongoose.model('deviceLaptop', deviceLaptopSchema)
+devicePcSchema.plugin(mongoosePaginate)
+module.exports = mongoose.model('devicePc', devicePcSchema)
