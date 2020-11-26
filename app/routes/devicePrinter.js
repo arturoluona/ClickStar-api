@@ -21,7 +21,7 @@ const trimRequest = require('trim-request')
 router.get(
   '/',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office', 'tecnico', 'user']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   controller.getItems,
   db.auditoriaMethods
@@ -33,7 +33,7 @@ router.get(
 router.post(
   '/',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office', 'tecnico', 'user']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.createItem,
   controller.createItem,
@@ -46,7 +46,7 @@ router.post(
 router.get(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office', 'tecnico', 'user']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.getItem,
   controller.getItem,
@@ -59,7 +59,7 @@ router.get(
 router.patch(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office', 'tecnico', 'user']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.updateItem,
   controller.updateItem,
@@ -72,7 +72,7 @@ router.patch(
 router.delete(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office', 'tecnico', 'user']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.deleteItem,
   controller.deleteItem,

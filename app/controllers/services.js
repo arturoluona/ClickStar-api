@@ -14,8 +14,9 @@ const db = require('../middleware/db')
  */
 exports.getItems = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     const query = await db.checkQueryString(req.query)
-    res.status(200).json(await db.getItems(req, model, query))
+    res.status(200).json(await db.getItems(req, model, query, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -29,9 +30,10 @@ exports.getItems = async (req, res, next) => {
  */
 exports.getItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.getItem(id, model))
+    res.status(200).json(await db.getItem(id, model, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -45,9 +47,10 @@ exports.getItem = async (req, res, next) => {
  */
 exports.updateItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.updateItem(id, model, req))
+    res.status(200).json(await db.updateItem(id, model, req, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -61,8 +64,9 @@ exports.updateItem = async (req, res, next) => {
  */
 exports.createItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
-    res.status(201).json(await db.createItem(req, model))
+    res.status(201).json(await db.createItem(req, model, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -76,9 +80,10 @@ exports.createItem = async (req, res, next) => {
  */
 exports.deleteItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.deleteItem(id, model))
+    res.status(200).json(await db.deleteItem(id, model, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)

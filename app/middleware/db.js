@@ -95,7 +95,7 @@ const listInitOptions = async (req) => {
     const sort = req.query.sort || 'createdAt'
     const sortBy = buildSort(sort, order)
     const page = parseInt(req.query.page, 10) || 1
-    const limit = parseInt(req.query.limit, 10) || 5
+    const limit = parseInt(req.query.limit, 10) || 1000
     const options = {
       sort: sortBy,
       lean: true,
@@ -158,8 +158,6 @@ module.exports = {
         method: req.method,
         rute: req.originalUrl
       }
-      request = matchedData(req)
-      send.id = request.id ? request.id : 'global'
       auditoriaMethod.create(send, (err) => {
         if (err) {
           console.log(err.message)
@@ -229,7 +227,8 @@ module.exports = {
    */
   async getItems(req, model, query, user, route) {
     const options = await listInitOptions(req)
-    auditGlobal('all', route, user)
+    if(!(req.originalUrl.toString().includes('pdf')))
+      auditGlobal('all', route, user)
     return new Promise((resolve, reject) => {
       model.paginate(query, options, (err, items) => {
         if (err) {
@@ -248,7 +247,8 @@ module.exports = {
     return new Promise((resolve, reject) => {
       model.findById(id, (err, item) => {
         itemNotFound(err, item, reject, 'NOT_FOUND')
-        auditGlobal('get', route, user, item)
+        if(!(req.originalUrl.toString().includes('pdf')))
+          auditGlobal('get', route, user, item)
         resolve(item)
       })
     })

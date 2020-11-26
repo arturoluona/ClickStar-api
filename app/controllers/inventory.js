@@ -14,8 +14,7 @@ const db = require('../middleware/db')
  */
 exports.getItems = async (req, res, next) => {
   try {
-    const { user } = req
-    const { originalUrl } = req
+    const { user, originalUrl } = req
     const query = await db.checkQueryString(req.query)
     res.status(200).json(await db.getItems(req, model, query, user, originalUrl))
     next()
@@ -31,8 +30,7 @@ exports.getItems = async (req, res, next) => {
  */
 exports.getItem = async (req, res, next) => {
   try {
-    const { user } = req
-    const { originalUrl } = req
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.getItem(id, model, user, originalUrl))
@@ -49,8 +47,7 @@ exports.getItem = async (req, res, next) => {
  */
 exports.updateItem = async (req, res, next) => {
   try {
-    const { user } = req
-    const { originalUrl } = req
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     const response = await db.updateItem(id, model, req, user, originalUrl)
@@ -74,8 +71,7 @@ exports.updateItem = async (req, res, next) => {
  */
 exports.createItem = async (req, res, next) => {
   try {
-    const { user } = req
-    const { originalUrl } = req
+    const { user, originalUrl } = req
     req = matchedData(req)
     const response = await db.createItem(req, model, user, originalUrl)
     res.status(201).json(response)
@@ -99,8 +95,7 @@ exports.createItem = async (req, res, next) => {
  */
 exports.deleteItem = async (req, res, next) => {
   try {
-    const { user } = req
-    const { originalUrl } = req
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.deleteItem(id, model, user, originalUrl))

@@ -56,8 +56,9 @@ const createItem = async (req) => {
  */
 exports.getItems = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     const query = await db.checkQueryString(req.query)
-    res.status(200).json(await db.getItems(req, model, query))
+    res.status(200).json(await db.getItems(req, model, query, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -71,9 +72,10 @@ exports.getItems = async (req, res, next) => {
  */
 exports.getItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.getItem(id, model))
+    res.status(200).json(await db.getItem(id, model, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)
@@ -87,6 +89,7 @@ exports.getItem = async (req, res, next) => {
  */
 exports.updateItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     const doesEmailExists = await emailer.emailExistsExcludingMyself(
@@ -94,7 +97,7 @@ exports.updateItem = async (req, res, next) => {
       req.email
     )
     if (!doesEmailExists) {
-      res.status(200).json(await db.updateItem(id, model, req))
+      res.status(200).json(await db.updateItem(id, model, req, user, originalUrl))
     }
     next()
   } catch (error) {
@@ -131,9 +134,10 @@ exports.createItem = async (req, res, next) => {
  */
 exports.deleteItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.deleteItem(id, model))
+    res.status(200).json(await db.deleteItem(id, model, user, originalUrl))
     next()
   } catch (error) {
     utils.handleError(res, error)

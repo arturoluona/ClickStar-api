@@ -19,7 +19,7 @@ exports.createItem = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('Description')
+  check('description')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -63,7 +63,7 @@ exports.updateItem = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('Description')
+  check('description')
     .exists()
     .withMessage('MISSING')
     .not()

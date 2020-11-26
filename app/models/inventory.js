@@ -9,7 +9,7 @@ const inventarioSchema = new mongoose.Schema(
     stock: {
       type: Number
     },
-    Description: {
+    description: {
       type: String
     },
     proveedor: {

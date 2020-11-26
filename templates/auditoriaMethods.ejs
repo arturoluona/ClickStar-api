@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas auditoria</title>
+</head>
+<body>
+    <h2 style="text-align: center;">Consultas auditoria</h2>
+
+    <div style="
+            margin-left: 4rem !important;">
+        <table style="
+            font-family: 'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;
+            font-size: 12px;
+            margin: 45px;
+            width: 480px;
+            text-align: left;
+            border-collapse: collapse;
+        ">
+            <tr>
+                <th style="
+                    text-align: center;
+                    font-size: 13px;     
+                    font-weight: normal;     
+                    padding: 8px;     
+                    background: #b9c9fe;
+                    border-top: 4px solid #aabcfe;    
+                    border-bottom: 1px solid #fff; 
+                    color: #039; 
+                ">Usuario</th>
+                <th style="
+                    text-align: center;
+                    font-size: 13px;     
+                    font-weight: normal;     
+                    padding: 8px;     
+                    background: #b9c9fe;
+                    border-top: 4px solid #aabcfe;    
+                    border-bottom: 1px solid #fff; 
+                    color: #039; 
+                ">Metodo</th>
+                <th style="
+                    text-align: center;
+                    font-size: 13px;     
+                    font-weight: normal;     
+                    padding: 8px;     
+                    background: #b9c9fe;
+                    border-top: 4px solid #aabcfe;    
+                    border-bottom: 1px solid #fff; 
+                    color: #039; 
+                ">Ruta</th>
+            </tr>
+            
+            <% for(var i=0; i<data.length; i++) {%>
+            
+            <tr>
+                <td id="user" style="
+                    padding: 8px;     
+                    background: #e8edff;     
+                    border-bottom: 1px solid #fff;
+                    color: #669;    
+                    border-top: 1px solid transparent;
+                "> 
+                    
+                    <%= data[i].user.name %> <br>
+                    <%= data[i].user.email %> <br>
+                    <%= data[i].user.role %> <br>
+                    <%= data[i].user._id %>
+                    
+                </td>
+                <td style="
+                    padding: 8px;     
+                    background: #e8edff;     
+                    border-bottom: 1px solid #fff;
+                    color: #669;    
+                    border-top: 1px solid transparent;
+                ">
+                    <%= data[i].method %>
+                </td>
+                <td style="
+                    padding: 8px;     
+                    background: #e8edff;     
+                    border-bottom: 1px solid #fff;
+                    color: #669;    
+                    border-top: 1px solid transparent;
+                ">
+                    <%= data[i].rute %>
+                </td>
+            </tr>
+        
+        <% } %>
+        </table>
+    </div>
+</body>
+</html>

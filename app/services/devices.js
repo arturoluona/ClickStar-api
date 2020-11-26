@@ -23,6 +23,56 @@ exports.getItem = (id, model) =>
                     $and: [{ $eq: ['$$idDevice', '$device._id'] }]
                   }
                 }
+              },
+              {
+                $lookup: {
+                  from: 'users',
+                  let: { idUser: '$customer' },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [{ $eq: ['$$idUser', '$_id'] }]
+                        }
+                      }
+                    },
+                    {
+                      $project: {
+                        name: 1,
+                        ci: 1,
+                        email: 1,
+                        phone: 1,
+                        country: 1
+                      }
+                    }
+                  ],
+                  as: 'customer'
+                }
+              },
+              {
+                $lookup: {
+                  from: 'users',
+                  let: { idUser: '$tecnico' },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [{ $eq: ['$$idUser', '$_id'] }]
+                        }
+                      }
+                    },
+                    {
+                      $project: {
+                        name: 1,
+                        ci: 1,
+                        email: 1,
+                        phone: 1,
+                        country: 1
+                      }
+                    }
+                  ],
+                  as: 'tecnico'
+                }
               }
             ],
             as: 'orden'

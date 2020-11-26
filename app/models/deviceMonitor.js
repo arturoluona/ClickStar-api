@@ -16,7 +16,6 @@ const deviceMonitorSchema = new mongoose.Schema(
       required: true
     },
     inch: {
-      //
       type: String
     },
     description: {
