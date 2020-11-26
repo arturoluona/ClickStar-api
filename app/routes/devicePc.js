@@ -13,7 +13,7 @@ const trimRequest = require('trim-request')
 /*
  * divicePc routes
  */
- 
+
 /*
  * Get items route
  */

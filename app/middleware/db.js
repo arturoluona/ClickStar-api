@@ -97,12 +97,12 @@ module.exports = {
   async auditoriaMethods(req) {
     try {
       const send = {
-        user: (req.user) ? req.user : 'sin usuario',
+        user: req.user ? req.user : 'sin usuario',
         method: req.method,
-        rute: req.originalUrl,
+        rute: req.originalUrl
       }
       req = matchedData(req)
-      send.id = (req.id) ? req.id : 'global'
+      send.id = req.id ? req.id : 'global'
       auditoriaMethod.create(send, (err, item) => {
         if (err) {
           console.log(err.message)
