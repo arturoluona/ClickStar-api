@@ -18,7 +18,6 @@ module.exports = [
     model: faker.random.words(5),
     make: faker.company.companyName(5),
     serial: faker.random.uuid(),
-    inch: '42 Pulgadas',
     description: faker.lorem.text(15),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()

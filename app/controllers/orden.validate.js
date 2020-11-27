@@ -11,6 +11,12 @@ exports.createItem = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
+  check('typeDevice')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('tecnico')
     .exists()
     .withMessage('MISSING')
@@ -52,6 +58,12 @@ exports.createItem = [
  */
 exports.updateItem = [
   check('customer')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('typeDevice')
     .exists()
     .withMessage('MISSING')
     .not()

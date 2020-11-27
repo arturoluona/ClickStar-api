@@ -26,13 +26,16 @@ const ordenSchema = new mongoose.Schema(
     },
     idOrden: {
       type: String,
-      default: () => nano.customAlphabet('1234567890', 6)(), // hash of idOrden
+      default: () => nano.customAlphabet('1234567890', 6)().toString(), // hash of idOrden
       require: true
     },
     status: {
       type: String,
       required: true,
       enum: ['wait', 'process', 'completed', 'delivered', 'cancelado']
+    },
+    typeDevice: {
+      type: Object
     },
     device: {
       type: {

@@ -18,7 +18,6 @@ module.exports = [
     model: '2 Antenas',
     make: 'Tp-Link',
     serial: 'qwertyuiop345678asdfgh45678',
-    inch: '42 Pulgadas',
     description: faker.lorem.text(15),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
