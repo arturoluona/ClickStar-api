@@ -26,7 +26,7 @@ exports.createItem = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('nameDivice')
+  check('name')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -64,7 +64,7 @@ exports.updateItem = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('nameDivice')
+  check('name')
     .exists()
     .withMessage('MISSING')
     .not()

@@ -20,6 +20,12 @@ exports.createItem = [
     .withMessage('IS_EMPTY')
     .isEmail()
     .withMessage('EMAIL_IS_NOT_VALID'),
+  check('ci')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('password')
     .exists()
     .withMessage('MISSING')
@@ -35,9 +41,7 @@ exports.createItem = [
     .withMessage('MISSING')
     .not()
     .isEmpty()
-    .withMessage('IS_EMPTY')
-    .isIn(['user', 'admin'])
-    .withMessage('USER_NOT_IN_KNOWN_ROLE'),
+    .withMessage('IS_EMPTY'),
   check('phone')
     .exists()
     .withMessage('MISSING')
@@ -59,14 +63,6 @@ exports.createItem = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
-  check('urlTwitter')
-    .optional()
-    .custom((v) => (v === '' ? true : validator.isURL(v)))
-    .withMessage('NOT_A_VALID_URL'),
-  check('urlGitHub')
-    .optional()
-    .custom((v) => (v === '' ? true : validator.isURL(v)))
-    .withMessage('NOT_A_VALID_URL'),
   (req, res, next) => {
     validationResult(req, res, next)
   }

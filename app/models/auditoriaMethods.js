@@ -14,10 +14,6 @@ const auditoriaMethodsSchema = new mongoose.Schema(
     rute: {
       type: String,
       required: true
-    },
-    id: {
-      type: String,
-      required: true
     }
   },
   {

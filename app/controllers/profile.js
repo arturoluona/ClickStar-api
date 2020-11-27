@@ -99,10 +99,11 @@ const changePasswordInDB = async (id, req) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getProfile = async (req, res) => {
+exports.getProfile = async (req, res, next) => {
   try {
     const id = await utils.isIDGood(req.user._id)
     res.status(200).json(await getProfileFromDB(id))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -113,11 +114,12 @@ exports.getProfile = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.updateProfile = async (req, res) => {
+exports.updateProfile = async (req, res, next) => {
   try {
     const id = await utils.isIDGood(req.user._id)
     req = matchedData(req)
     res.status(200).json(await updateProfileInDB(req, id))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -128,7 +130,7 @@ exports.updateProfile = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.changePassword = async (req, res) => {
+exports.changePassword = async (req, res, next) => {
   try {
     const id = await utils.isIDGood(req.user._id)
     const user = await findUser(id)
@@ -140,6 +142,7 @@ exports.changePassword = async (req, res) => {
       // all ok, proceed to change password
       res.status(200).json(await changePasswordInDB(id, req))
     }
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }

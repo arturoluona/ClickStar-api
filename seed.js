@@ -4,9 +4,10 @@ const path = require('path')
 const config = {
   database: process.env.MONGO_URI,
   inputPath: path.resolve(__dirname, './data'),
-  dropDatabase: false
+  dropDatabase: false,  
+  databaseReconnectTimeout: 100000,
 }
-console.log(config)
+
 const seeder = new Seeder(config)
 const collections = seeder.readCollectionsFromPath(path.resolve('./data'))
 

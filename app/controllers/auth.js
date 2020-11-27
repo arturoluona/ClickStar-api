@@ -444,7 +444,7 @@ const getUserIdFromToken = async (token) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   try {
     const data = matchedData(req)
     const user = await findUser(data.email)
@@ -459,6 +459,7 @@ exports.login = async (req, res) => {
       await saveLoginAttemptsToDB(user)
       res.status(200).json(await saveUserAccessAndReturnToken(req, user))
     }
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -469,7 +470,7 @@ exports.login = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   try {
     // Gets locale from header 'Accept-Language'
     const locale = req.getLocale()
@@ -482,6 +483,7 @@ exports.register = async (req, res) => {
       emailer.sendRegistrationEmailMessage(locale, item)
       res.status(201).json(response)
     }
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -492,11 +494,12 @@ exports.register = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.verify = async (req, res) => {
+exports.verify = async (req, res, next) => {
   try {
     req = matchedData(req)
     const user = await verificationExists(req.id)
     res.status(200).json(await verifyUser(user))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -507,7 +510,7 @@ exports.verify = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.forgotPassword = async (req, res) => {
+exports.forgotPassword = async (req, res, next) => {
   try {
     // Gets locale from header 'Accept-Language'
     const locale = req.getLocale()
@@ -516,6 +519,7 @@ exports.forgotPassword = async (req, res) => {
     const item = await saveForgotPassword(req)
     emailer.sendResetPasswordEmailMessage(locale, item)
     res.status(200).json(forgotPasswordResponse(item))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -526,7 +530,7 @@ exports.forgotPassword = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.resetPassword = async (req, res) => {
+exports.resetPassword = async (req, res, next) => {
   try {
     const data = matchedData(req)
     const forgotPassword = await findForgotPassword(data.id)
@@ -534,6 +538,7 @@ exports.resetPassword = async (req, res) => {
     await updatePassword(data.password, user)
     const result = await markResetPasswordAsUsed(req, forgotPassword)
     res.status(200).json(result)
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -544,7 +549,7 @@ exports.resetPassword = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getRefreshToken = async (req, res) => {
+exports.getRefreshToken = async (req, res, next) => {
   try {
     const tokenEncrypted = req.headers.authorization
       .replace('Bearer ', '')
@@ -556,6 +561,7 @@ exports.getRefreshToken = async (req, res) => {
     // Removes user info from response
     delete token.user
     res.status(200).json(token)
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
