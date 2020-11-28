@@ -203,6 +203,39 @@ module.exports = {
   },
 
   /**
+   * Get user for role
+   * @param {Object} dataUser - query object
+   * @param {Object} query - query object
+   */
+  getItemsUsers(model, query = {}, role) {
+    if(role === 'user') {
+      query = {
+        ...query,
+        ...{
+          $and: [{ role }]
+        }
+      }
+    }
+    if(role === 'empleados') {
+      query = {
+        ...query,
+        ...{
+          $or: [
+            { role: 'office' },
+            { role: 'admin' },
+            { role: 'tecnico' }
+          ]
+        }
+      }
+    }
+    return model.aggregate([
+      {
+        $match: query
+      }
+    ])
+  },
+
+  /**
    * Gets items from database
    * @param {Object} req - request object
    * @param model

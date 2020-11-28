@@ -54,11 +54,23 @@ const createItem = async (req) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getItems = async (req, res, next) => {
+exports.getItemsCustomer = async (req, res, next) => {
   try {
     const { user, originalUrl } = req
     const query = await db.checkQueryString(req.query)
-    res.status(200).json(await db.getItems(req, model, query, user, originalUrl))
+    const aggregation = db.getItemsUsers(model, query, 'user')
+    res.status(200).json(await db.getItemsAggregate(req, model, aggregation))
+    next()
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+exports.getItemsEmpleados = async (req, res, next) => {
+  try {
+    const query = await db.checkQueryString(req.query)
+    const aggregation = db.getItemsUsers(model, query, 'empleados')
+    res.status(200).json(await db.getItemsAggregate(req, model, aggregation))
     next()
   } catch (error) {
     utils.handleError(res, error)

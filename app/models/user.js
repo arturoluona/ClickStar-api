@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
-const mongoosePaginate = require('mongoose-paginate-v2')
+const aggregatePaginate = require('mongoose-aggregate-paginate-v2')
 
 const UserSchema = new mongoose.Schema(
   {
@@ -99,5 +99,5 @@ UserSchema.methods.comparePassword = function (passwordAttempt, cb) {
     err ? cb(err) : cb(null, isMatch)
   )
 }
-UserSchema.plugin(mongoosePaginate)
+UserSchema.plugin(aggregatePaginate)
 module.exports = mongoose.model('User', UserSchema)
