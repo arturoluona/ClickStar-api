@@ -14,7 +14,7 @@
     <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.model %></h4>
     <h4 style="position: relative; top: -40px;"> Serial: <%= data.serial %></h4>
     <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.loader %></h4>
-    <p style="position: relative; top: -40px; text-align: center;"> <%= data.description %></p>
+    <p style="position: relative; top: -40px; text-align: center; padding: 10px;"> <%= data.description %></p>
     </div>
 
     <% for(var i=0; i<data.orden.length; i++) { %>
@@ -22,10 +22,11 @@
             <div style="padding-left: 10px;">
                
         <h4 style="padding-left: 20px; padding-top: 10px; background-color: rgba(47, 66, 236, 0.705); color: white;">Cliente: <%= data.orden[i].customer[0].name %></h4>
-        <h4 style="position: relative;">Tecnico: <%= data.orden[i].tecnico[0].name %></h4>
-        <h4 style="position: relative; top: -40px; left: 50%;">ID: <%= data.orden[i]._id %></h4>
+        <h4 style="position: relative;">Tecnico: <%= data.orden[i].tecnico[0].name %> / </h4>
+        <h4 style="position: relative; top: -40px; left: 50%;">ID: <%= data.orden[i].idOrden %></h4>
         <p style="position: relative; top: -40px;"> Status: <%= data.orden[i].status %></p> 
-        <p style="position: relative; top: -40px; text-align: center;"> <%= data.orden[i].description %></p>  
+        <p style="position: relative; top: -80px; left: 50%;">Precio: <%= data.orden[i].price %></p>
+        <p style="position: relative; top: -40px; text-align: center; padding:10px;"> <%= data.orden[i].description %></p>  
         </div>
         
         </div>

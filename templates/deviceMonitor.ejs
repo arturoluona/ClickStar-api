@@ -7,74 +7,35 @@
 </head>
 <body>
     <h2 style="text-align: center; background-color: rgba(47, 66, 236, 0.705); color: white;">Dispositivo Monitor</h2>
-    <div style=" border: solid 1px rgb(14, 98, 209); padding-left: 10px; ">
-
-        <table style="font-size: 0.8em;">
-           <tr>
-               <th style="border:  rgba(47, 66, 236, 0.705) solid 1px; width: 200px;">
-                
-                <p>ID: <%= data._id %></p>
-            </th>
-
-           </tr> 
-           <tr>
-               <th>
-                 <p>Marca: <%= data.make %></p>
-               </th>
-               <th style="border-left:  rgba(47, 66, 236, 0.705) solid 1px; border-right: rgba(47, 66, 236, 0.705) solid 1px ;">
-                   <p>
-                    Modelo: <%= data.model %>
-                   </p>
-               </th>
-               <th>
-                   <p>
-                    Serial: <%= data.serial %>
-                   </p>
-               </th>
-               
-           </tr>
-           <tr>
-               <th>
-                   Inch: <%= data.inch %>
-               </th>
-           </tr>
-
-
-        </table>
-            <p style="text-align: center;"> <%= data.description %></p>
+    <div style=" border: solid 1px rgb(14, 98, 209);">
+        <div style="padding-left: 10px;">
+    <h3 style="padding-left: 20px; padding-top: 10px;">ID: <%= data._id %></h3>
+    <h3 style="position: relative;">Marca: <%= data.make %></h3>
+    <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.model %></h4>
+    <h4 style="position: relative; top: -40px;"> Serial: <%= data.serial %></h4>
+    <h4 style="position: relative; top: -40px; left: 50%;">Pulgadas: <%= data.inch %></h4>
+    <p style="position: relative; top: -40px; text-align: center; padding: 10px;"> <%= data.description %></p>
     </div>
-
-    <div style=" border: solid 1px rgb(14, 98, 209); padding-left: 10px; ">
-        <% for(var i=0; i<data.orden.length; i++) { %>
-        <table style="font-size: 0.8em;">
-           <tr>
-               <th style="border:  rgba(47, 66, 236, 0.705) solid 1px; width: 200px;">
-                
-                <p><%= data.orden[i].customer[0].name %></p>
-            </th>
-
-           </tr> 
-           <tr>
-               <th>
-                 <p>Tecnico: <%= data.orden[i].tecnico[0].name %></p>
-               </th>
-               <th style="border-left:  rgba(47, 66, 236, 0.705) solid 1px; border-right: rgba(47, 66, 236, 0.705) solid 1px ;">
-                   <p style="padding-left: 10px; padding-right: 10px;">
-                    ID: <%= data.orden[i]._id %>
-                   </p>
-               </th>
-               <th>
-                   <p style="padding-left: 10px;">
-                    Status: <%= data.orden[i].status %>
-                   </p>
-               </th>
+</div> 
+<div>
+    <% for(var i=0; i<data.orden.length; i++) { %>
+        <div style=" border: solid 1px rgb(14, 98, 209);">
+            <div style="padding-left: 10px;">
                
-           </tr>
+        <h4 style="padding-left: 20px; padding-top: 10px; background-color: rgba(47, 66, 236, 0.705); color: white;">Cliente: <%= data.orden[i].customer[0].name %></h4>
+        <h4 style="position: relative;">Tecnico: <%= data.orden[i].tecnico[0].name %> / <%= data.orden[i].tecnico[0].email %></h4>
+        <h4 style="position: relative; top: -40px; left: 50%;">ID: <%= data.orden[i].idOrden %></h4>
+        <p style="position: relative; top: -40px;"> Status: <%= data.orden[i].status %></p> 
+        <p style="position: relative; top: -80px; left: 50%;">Precio: <%= data.orden[i].price %></p>
+        <p style="position: relative; top: -40px; text-align: center; padding:10px;"> <%= data.orden[i].description %></p>  
+        </div>
+        
+
+<% 
 
 
-        </table>
-            <p style="text-align: center;"> <%= data.orden[i].description %></p>
-         <% } %>
-    </div>
+        </div>
+        <% } %>
+</div>
 </body>
 </html>
