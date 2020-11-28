@@ -154,7 +154,7 @@ module.exports = {
   async auditoriaMethods(req) {
     try {
       const send = {
-        user: (req.user) ? req.user : 'sin usuario',
+        user: req.user ? req.user : 'sin usuario',
         method: req.method,
         rute: req.originalUrl
       }

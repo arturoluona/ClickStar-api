@@ -6,28 +6,36 @@
     <title>Dispositivo</title>
 </head>
 <body>
-    <h2 style="text-align: center;">Dispositivo Monitor</h2>
+    <h2 style="text-align: center; background-color: rgba(47, 66, 236, 0.705); color: white;">Dispositivo Monitor</h2>
+    <div style=" border: solid 1px rgb(14, 98, 209);">
+        <div style="padding-left: 10px;">
+    <h3 style="padding-left: 20px; padding-top: 10px;">ID: <%= data._id %></h3>
+    <h3 style="position: relative;">Marca: <%= data.make %></h3>
+    <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.model %></h4>
+    <h4 style="position: relative; top: -40px;"> Serial: <%= data.serial %></h4>
+    <h4 style="position: relative; top: -40px; left: 50%;">Pulgadas: <%= data.inch %></h4>
+    <p style="position: relative; top: -40px; text-align: center; padding: 10px;"> <%= data.description %></p>
+    </div>
+</div> 
+<div>
+    <% for(var i=0; i<data.orden.length; i++) { %>
+        <div style=" border: solid 1px rgb(14, 98, 209);">
+            <div style="padding-left: 10px;">
+               
+        <h4 style="padding-left: 20px; padding-top: 10px; background-color: rgba(47, 66, 236, 0.705); color: white;">Cliente: <%= data.orden[i].customer[0].name %></h4>
+        <h4 style="position: relative;">Tecnico: <%= data.orden[i].tecnico[0].name %> / <%= data.orden[i].tecnico[0].email %></h4>
+        <h4 style="position: relative; top: -40px; left: 50%;">ID: <%= data.orden[i].idOrden %></h4>
+        <p style="position: relative; top: -40px;"> Status: <%= data.orden[i].status %></p> 
+        <p style="position: relative; top: -80px; left: 50%;">Precio: <%= data.orden[i].price %></p>
+        <p style="position: relative; top: -40px; text-align: center; padding:10px;"> <%= data.orden[i].description %></p>  
+        </div>
+        
 
-    <p style="
-        background-color: aqua;
-        padding: 2rem;
-        height: 3em;
-        width: 30em;
-        border-radius: 2em;
-    ">
-        Serial: <%= data.serial %>
-    </p>
+<% 
 
-    <ul>
-        <% for(var i=0; i<data.orden.length; i++) { %>
-            <li>
-               Cliente <%= data.orden[i].customer[0].name %>
-            </li>
-            <li>
-               Tecnico <%= data.orden[i].tecnico[0].name %>
-            </li>
+
+        </div>
         <% } %>
-
-    </ul>
+</div>
 </body>
 </html>

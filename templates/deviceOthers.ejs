@@ -6,10 +6,94 @@
     <title>Dispositivo</title>
 </head>
 <body>
-    <h2 style="text-align: center;">Dispositivo Otro</h2>
 
-    <p>
-        <%= JSON.stringify(data) %>
-    </p>
+    </div>
+     <h2 style="text-align: center; background-color: rgba(47, 66, 236, 0.705); color: white;">Otros Dispositivos</h2>
+    
+     <div style=" border: solid 1px rgb(14, 98, 209); padding-left: 10px; ">
+
+        <table style="font-size: 0.8em;">
+           <tr>
+               <th style="border:  rgba(47, 66, 236, 0.705) solid 1px; width: 200px;">
+                
+                <p>ID: <%= data._id %></p>
+            </th>
+
+           </tr> 
+           <tr>
+               <th>
+                 <p>Marca: <%= data.make %></p>
+               </th>
+               <th style="border-left:  rgba(47, 66, 236, 0.705) solid 1px; border-right: rgba(47, 66, 236, 0.705) solid 1px ;">
+                   <p>
+                    Modelo: <%= data.model %>
+                   </p>
+               </th>
+               <th>
+                   <p>
+                    Serial: <%= data.serial %>
+                   </p>
+               </th>
+               
+           </tr>
+
+
+        </table>
+            <p style="text-align: center;"> <%= data.description %></p>
+    </div>
+
+    <div style=" border: solid 1px rgb(14, 98, 209); padding-left: 10px; ">
+        <% for(var i=0; i<data.orden.length; i++) { %>
+        <table style="font-size: 0.8em;">
+           <tr>
+               <th style="border:  rgba(47, 66, 236, 0.705) solid 1px; width: 200px;">
+                
+                <p><%= data.orden[i].customer[0].name %></p>
+            </th>
+
+           </tr> 
+           <tr>
+               <th>
+                 <p>Tecnico: <%= data.orden[i].tecnico[0].name %></p>
+               </th>
+               <th style="border-left:  rgba(47, 66, 236, 0.705) solid 1px; border-right: rgba(47, 66, 236, 0.705) solid 1px ;">
+                   <p style="padding-left: 10px; padding-right: 10px;">
+                    ID: <%= data.orden[i]._id %>
+                   </p>
+               </th>
+               <th>
+                   <p style="padding-left: 10px;">
+                    Status: <%= data.orden[i].status %>
+                   </p>
+               </th>
+               
+           </tr>
+
+
+        </table>
+            <p style="text-align: center;"> <%= data.orden[i].description %></p>
+         <% } %>
+    </div>
+<!-- <div style="position: static;">
+    <% for(var i=0; i<data.orden.length; i++) { %>
+        <div style=" border: solid 1px rgb(14, 98, 209);        
+        ">
+            <div style="padding-left: 10px;">
+                 <div style=" background-color: rgba(47, 66, 236, 0.705); color: white;"> <%= data.orden[i].customer[0].name %></div>
+                    <div style="">Tecnico: <%= data.orden[i].tecnico[0].name %></div>
+            </div>
+                <div style=" float: left;">
+                    <div style="">ID: <%= data.orden[i]._id %></div>
+                     <p style=""> Status: <%= data.orden[i].status %></p> 
+                       <p style=""> <%= data.orden[i].description %></p>  
+                </div>
+               
+       
+        
+        
+        
+        </div>
+        <% } %>
+</div> -->
 </body>
 </html>

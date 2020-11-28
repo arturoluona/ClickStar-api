@@ -8,8 +8,29 @@
 <body>
     <h2 style="text-align: center;">Dispositivo Impresora</h2>
 
-    <p>
-        <%= JSON.stringify(data) %>
-    </p>
+    <h2 style="text-align: center; background-color: rgba(47, 66, 236, 0.705); color: white;">Dispositivo Impresora</h2>
+    <div style=" border: solid 1px rgb(14, 98, 209);">
+        <div style="padding-left: 10px;">
+    <h3 style="padding-left: 20px; padding-top: 10px;">ID: <%= data._id %></h3>
+    <h3 style="position: relative;">Marca: <%= data.make %></h3>
+    <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.model %></h4>
+    <h4 style="position: relative; top: -40px;"> Serial: <%= data.serial %></h4>
+    <h4 style="position: relative; top: -70px; left: 50%;"> Cabezal: <%= data.cabezal %></h4>
+    <p style="position: relative; top: -40px; text-align: center;"> <%= data.description %></p>
+    </div>
+
+    <% for(var i=0; i<data.orden.length; i++) { %>
+        <div style=" border: solid 1px rgb(14, 98, 209);">
+            <div style="padding-left: 10px;">
+               
+        <h4 style="padding-left: 20px; padding-top: 10px; background-color: rgba(47, 66, 236, 0.705); color: white;">Cliente: <%= data.orden[i].customer[0].name %></h4>
+        <h4 style="position: relative;">Tecnico: <%= data.orden[i].tecnico[0].name %></h4>
+        <h4 style="position: relative; top: -40px; left: 50%;">ID: <%= data.orden[i]._id %></h4>
+        <p style="position: relative; top: -40px;"> Status: <%= data.orden[i].status %></p> 
+        <p style="position: relative; top: -40px; text-align: center;"> <%= data.orden[i].description %></p>  
+        </div>
+        
+        </div>
+        <% } %>
 </body>
 </html>

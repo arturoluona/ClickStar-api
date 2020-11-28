@@ -6,10 +6,83 @@
     <title>Orden</title>
 </head>
 <body>
-    <h2 style="text-align: center;">Orden</h2>
+    <h2 style="text-align: center; background-color: rgba(47, 66, 236, 0.705); color: white;">Orden</h2>
 
-    <p>
-        <%= JSON.stringify(data) %>
-    </p>
+    <div style=" border: solid 1px rgb(14, 98, 209);">
+        <div style="padding-left: 10px;">
+    <h3 style="padding-left: 20px; padding-top: 10px;">ID: <%= data.idOrden %></h3>
+    <h3 style="position: relative;">cliente: <%= data.customer[0].name %></h3>
+    <h4 style="position: relative; top: -40px; left: 50%;">Tecnico <%= data.tecnico[0].name %></h4>
+    <h4 style="position: relative; top: -40px; left: 50%;">Status: <%= data.status %></h4>
+    <p style="position: relative; top: -40px; text-align: center; padding: 10px;"> <%= data.description %></p>
+    </div>
+</div> 
+
+    <% if (data.typeDevice.value === 'devicePc') { %>
+        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
+            <h2 style=""><%= data.typeDevice.name %></h2>
+            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
+            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
+            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
+            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.ram %></h4>
+            <p style="position: relative; top: -40px; text-align: center; padding: 10px;"> <%= data.device.label.description %></p>
+            
+        </div>
+    <% } %>
+    <% if (data.typeDevice.value === 'deviceRouter') { %>
+        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
+            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
+            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
+            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
+            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.loader %></h4>
+            <p style="position: relative; top: -40px; text-align: center; padding: 10px; margin-bottom: 0;"> <%= data.device.label.description %></p>
+            
+        </div>
+    <% } %>
+    <% if (data.typeDevice.value === 'devicePrinter') { %>
+        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
+            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
+            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
+            <h4 style="position: relative; top: -40px; margin-bottom: 0;"> Serial: <%= data.device.label.serial %></h4>
+            <h4 style="position: relative; top: -50px; margin-bottom: 0;"> Cabezal: <%= data.device.label.cabezal %></h4>
+            <h4 style="position: relative; top: -80px; left: 50%; margin-bottom: 0;">Precio: <%= data.price %></h4>
+            <table style=" position: relative; top: -50px;">
+                <tr style="">
+                    <th>
+                        <h4 style="padding-left: 10px;">Tinta: <%= data.device.label.tinta[0].display %></h4>
+                    </th>
+                    <th>
+                        <h4 style="padding-left: 10px;">Tinta: <%= data.device.label.tinta[1].display %></h4>
+                    </th>
+                    <th>
+                        <h4 style="padding-left: 10px;">Tinta: <%= data.device.label.tinta[2].display %></h4>
+                    </th>
+                </tr>
+            </table>
+            
+            <p style="position: relative; top: -70px; text-align: center; padding: 10px;"> <%= data.device.label.description %></p>
+            
+        </div>
+    <% } %>
+    <% if (data.typeDevice.value === 'deviceOthers') { %>
+        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
+            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
+            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
+            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
+            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.loader %></h4>
+            <p style="position: relative; top: -40px; text-align: center; padding: 10px; margin-bottom: 0;"> <%= data.device.label.description %></p>
+            
+        </div>
+    <% } %>
+    <% if (data.typeDevice.value === 'deviceMonitor') { %>
+        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
+            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
+            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
+            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
+            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.inch %></h4>
+            <p style="position: relative; top: -40px; text-align: center; padding: 10px; margin-bottom: 0;"> <%= data.device.label.description %></p>
+            
+        </div>
+    <% } %>
 </body>
 </html>
