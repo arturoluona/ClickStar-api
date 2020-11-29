@@ -2,7 +2,7 @@ const faker = require('faker')
 const ObjectID = require('mongodb').ObjectID
 
 module.exports = [
-  {
+  { 
     _id:  new ObjectID('5fbf0d49ac8acb22bc043b81'),
     tinta: [
       'Azul', 'Amarillo', 'Rojo', 'negro'

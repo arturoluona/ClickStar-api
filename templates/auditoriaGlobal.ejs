@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auditoria Global</title>
 </head>
-<body>
+<body style="font-family: Arial, Helvetica, sans-serif;">
     <h2 style="text-align: center;">Auditoria Global</h2>
 
-    <div style="
-            margin-left: 4rem !important;">
+    <div>
         <table style="
             font-family: 'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;
             font-size: 12px;
-            margin: 45px;
+            margin: 30px;
+                    background: #e8edff;   
             width: 480px;
             text-align: left;
             border-collapse: collapse;
@@ -60,6 +60,16 @@
                     border-bottom: 1px solid #fff; 
                     color: #039; 
                 ">Ruta</th>
+                <th style="
+                    text-align: center;
+                    font-size: 13px;     
+                    font-weight: normal;     
+                    padding: 8px;     
+                    background: #b9c9fe;
+                    border-top: 4px solid #aabcfe;    
+                    border-bottom: 1px solid #fff; 
+                    color: #039; 
+                ">Fecha</th>
             </tr>
             
             <% for(var i=0; i<data.length; i++) { %>
@@ -99,12 +109,28 @@
                 </td>
                 <td style="
                     padding: 8px;     
-                    background: #e8edff;     
-                    border-bottom: 1px solid #fff;
+                    background: #e8edff;
                     color: #669;    
                     border-top: 1px solid transparent;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    display: block !important;
+                    text-overflow: ellipsis;
                 ">
-                    <%= data[i].route %>
+                   <p style="
+                    width: 20rem;
+                    ">
+                        <%= data[i].route %>
+                   </p>
+                </td>
+                <td style="
+                    padding: 8px;     
+                    background: #e8edff;     
+                    border-bottom: 1px solid #fff;
+                    color: #669;      
+                    border-top: 1px solid transparent;
+                ">
+                    <%= data[i].createdAt.toLocaleDateString() %>
                 </td>
             </tr>
         

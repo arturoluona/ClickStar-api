@@ -38,6 +38,7 @@ exports.auditoriaMethods = async (req, res) => {
   try {
     const query = await db.checkQueryString(req.query)
     const data = await db.getItems(req, auditoriaMethods, query)
+    options.orientation = 'landscape'
     res.render(`${__dirname}/../../templates/auditoriaMethods.ejs`,{data: data.docs}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/auditoriaMethods.pdf', function(err, resp) {
         if (err) console.log(err)
@@ -47,7 +48,8 @@ exports.auditoriaMethods = async (req, res) => {
           res.send(file)
         }
       });
-    })
+    })    
+    options.orientation = 'portrait'
   } catch (error) {
     utils.handleError(res, error)
   }
