@@ -10,10 +10,10 @@ module.exports = [
       _id:  new ObjectID('5fbd0bd963ffbe1c2c45342a'),
       label: {
         _id:  '5fbd0bd963ffbe1c2c45342a',
-        loader: 'vmkeiorvm495vberu9',
+        loader: 'vmkeiorvm',
         model: '3 Antenas',
         make: 'D-Link',
-        serial: 'qwertyuiop345678asdfgh45678',
+        serial: '78asdfgh45678',
         description: faker.lorem.text(15),
         createdAt: faker.date.past(),
         updatedAt: faker.date.recent()
@@ -41,10 +41,10 @@ module.exports = [
       _id:  new ObjectID('5fbd0bd963ffbe1c2c45342a'),
       label: {
         _id:  '5fbd0bd963ffbe1c2c45342a',
-        loader: 'vmkeiorvm495vberu9',
+        loader: '495vberu9',
         model: '3 Antenas',
         make: 'D-Link',
-        serial: 'qwertyuiop345678asdfgh45678',
+        serial: 'asdfgh45678',
         description: faker.lorem.text(15),
         createdAt: faker.date.past(),
         updatedAt: faker.date.recent()
@@ -77,10 +77,10 @@ module.exports = [
       _id:  new ObjectID('5fbd0bd963ffbe1c2c45142b'),
       label: {
         _id: '5fbd0bd963ffbe1c2c45142b',
-        loader: 'vmkeiorvm495vberu9',
+        loader: 'm495vberu9',
         model: '2 Antenas',
         make: 'Tp-Link',
-        serial: 'qwertyuiop345678asdfgh45678',
+        serial: '6asdfgh45678',
         description: faker.lorem.text(15),
         createdAt: faker.date.past(),
         updatedAt: faker.date.recent()
@@ -262,7 +262,7 @@ module.exports = [
         ],
         model: 'Epson l210',
         make: 'EPSON',
-        serial: 'mnbvcdtyuiolkyt45678',
+        serial: 'iolkyt45678',
         cabezal: 'wcwce',
         description: faker.lorem.text(15),
         createdAt: faker.date.past(),
@@ -301,7 +301,7 @@ module.exports = [
         ],
         model: 'Epson tx111',
         make: 'EPSON',
-        serial: 'asdfghqwert34567xcvb',
+        serial: 'wert34567xcvb',
         cabezal: 'gvybuyb',
         description: faker.lorem.text(15),
         createdAt: faker.date.past(),

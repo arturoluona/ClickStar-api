@@ -14,7 +14,7 @@ module.exports = [
   },
   {
     _id:  new ObjectID('5fbf02499a7ee61718e86652'),
-    model: 'G7877878',
+    model: 'G78778',
     make: 'Samsung',
     serial: faker.random.uuid(),
     inch: '42 Pulgadas',

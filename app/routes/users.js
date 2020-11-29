@@ -15,6 +15,15 @@ const trimRequest = require('trim-request')
  * Users routes
  */
 
+router.get(
+  '/',
+  requireAuth,
+  AuthController.roleAuthorization(['admin', 'office']),
+  trimRequest.all,
+  controller.getItems,
+  db.auditoriaMethods
+)
+
 /*
  * Get items route
  */
@@ -28,7 +37,7 @@ router.get(
 )
 
 router.get(
-  '/empleado',
+  '/empleados',
   requireAuth,
   AuthController.roleAuthorization(['admin']),
   trimRequest.all,

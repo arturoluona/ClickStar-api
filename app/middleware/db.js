@@ -218,14 +218,14 @@ module.exports = {
     }
     if(role === 'empleados') {
       query = {
-        ...query,
-        ...{
-          $or: [
-            { role: 'office' },
-            { role: 'admin' },
-            { role: 'tecnico' }
-          ]
-        }
+        $or: [
+          { role: 'office' },
+          { role: 'admin' },
+          { role: 'tecnico' }
+        ],
+        $and: [
+          query
+        ]
       }
     }
     return model.aggregate([
@@ -280,7 +280,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       model.findById(id, (err, item) => {
         itemNotFound(err, item, reject, 'NOT_FOUND')
-        if(!(req.originalUrl.toString().includes('pdf')))
+        if(!(route.toString().includes('pdf')))
           auditGlobal('get', route, user, item)
         resolve(item)
       })

@@ -66,6 +66,17 @@ exports.getItemsCustomer = async (req, res, next) => {
   }
 }
 
+exports.getItems = async (req, res, next) => {
+  try {
+    const { user, originalUrl } = req
+    const query = await db.checkQueryString(req.query)
+    res.status(200).json(await db.getItems(req, model, query, user, originalUrl))
+    next()
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
 exports.getItemsEmpleados = async (req, res, next) => {
   try {
     const query = await db.checkQueryString(req.query)
