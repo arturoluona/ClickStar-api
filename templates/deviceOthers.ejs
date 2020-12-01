@@ -5,95 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dispositivo</title>
 </head>
-<body>
+<body style="font-family: Arial, Helvetica, sans-serif;">
 
-    </div>
-     <h2 style="text-align: center; background-color: rgba(47, 66, 236, 0.705); color: white;">Otros Dispositivos</h2>
-    
-     <div style=" border: solid 1px rgb(14, 98, 209); padding-left: 10px; ">
+    <h2 style="
+        text-align: center; 
+        border-radius: 2rem;
+        padding: .5rem;
+        background-color: rgba(47, 66, 236, 0.705); 
+        color: white;">
+        Dispositivo Otros
+    </h2>
+    <div style="
+        margin-bottom: 40rem; 
+        text-align: center;  
+        border-radius: .7rem; 
+        border: solid 1px rgb(14, 98, 209);">
 
-        <table style="font-size: 0.8em;">
-           <tr>
-               <th style="border:  rgba(47, 66, 236, 0.705) solid 1px; width: 200px;">
-                
-                <p>ID: <%= data._id %></p>
-            </th>
-
-           </tr> 
-           <tr>
-               <th>
-                 <p>Marca: <%= data.make %></p>
-               </th>
-               <th style="border-left:  rgba(47, 66, 236, 0.705) solid 1px; border-right: rgba(47, 66, 236, 0.705) solid 1px ;">
-                   <p>
-                    Modelo: <%= data.model %>
-                   </p>
-               </th>
-               <th>
-                   <p>
-                    Serial: <%= data.serial %>
-                   </p>
-               </th>
-               
-           </tr>
-
-
-        </table>
-            <p style="text-align: center;"> <%= data.description %></p>
+        <div style="margin-left: 6rem; width: 35rem; padding: .5rem;">
+            <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b> Nombre de equipo: </b><%= data.name %>
+             </p>
+            <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+               <b> Modelo: </b><%= data.model %>
+            </p>
+            <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+               <b>  Marca: </b><%= data.make %>
+            </p>
+            <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+               <b>  Serial:</b> <%= data.serial %>
+            </p>
+            <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+               <b>Descripcion:</b>   <%= data.description %>
+            </p>
+        </div>        
     </div>
 
-    <div style=" border: solid 1px rgb(14, 98, 209); padding-left: 10px; ">
-        <% for(var i=0; i<data.orden.length; i++) { %>
-        <table style="font-size: 0.8em;">
-           <tr>
-               <th style="border:  rgba(47, 66, 236, 0.705) solid 1px; width: 200px;">
-                
-                <p><%= data.orden[i].customer[0].name %></p>
-            </th>
-
-           </tr> 
-           <tr>
-               <th>
-                 <p>Tecnico: <%= data.orden[i].tecnico[0].name %></p>
-               </th>
-               <th style="border-left:  rgba(47, 66, 236, 0.705) solid 1px; border-right: rgba(47, 66, 236, 0.705) solid 1px ;">
-                   <p style="padding-left: 10px; padding-right: 10px;">
-                    ID: <%= data.orden[i]._id %>
-                   </p>
-               </th>
-               <th>
-                   <p style="padding-left: 10px;">
-                    Status: <%= data.orden[i].status %>
-                   </p>
-               </th>
-               
-           </tr>
-
-
-        </table>
-            <p style="text-align: center;"> <%= data.orden[i].description %></p>
-         <% } %>
-    </div>
-<!-- <div style="position: static;">
+    <h2 style="
+        text-align: center; 
+        border-radius: 2rem;
+        width: 15rem;
+        margin-left: 16rem;
+        padding: .5rem;
+        background-color: rgba(47, 66, 236, 0.705); 
+        color: white;">
+        Ordenes
+    </h2>
     <% for(var i=0; i<data.orden.length; i++) { %>
-        <div style=" border: solid 1px rgb(14, 98, 209);        
-        ">
-            <div style="padding-left: 10px;">
-                 <div style=" background-color: rgba(47, 66, 236, 0.705); color: white;"> <%= data.orden[i].customer[0].name %></div>
-                    <div style="">Tecnico: <%= data.orden[i].tecnico[0].name %></div>
+        <div style="
+            border-radius: .7rem; 
+            margin-bottom: 2rem; 
+            border: solid 1px rgb(14, 98, 209);
+            padding: 2rem;">
+            <div>
+                <span><b>Id:</b> <%= data.orden[i].idOrden %></span>
+                <span style="margin-left: 13rem;"><b>Precio:</b> <%= data.orden[i].price %></span>
+                <span style="margin-left: 12rem;"><b>Fecha</b> <%= data.orden[i].createdAt.toLocaleDateString() %></span> 
             </div>
-                <div style=" float: left;">
-                    <div style="">ID: <%= data.orden[i]._id %></div>
-                     <p style=""> Status: <%= data.orden[i].status %></p> 
-                       <p style=""> <%= data.orden[i].description %></p>  
-                </div>
-               
-       
-        
-        
-        
+            
+            <table style="margin-top: 2rem;">   
+                <td>
+                    <table style="
+                        border-radius: .7rem; 
+                        border: solid 1px rgb(14, 98, 209);
+                        background-color: rgba(14, 99, 209, 0.281);
+                        margin-left: 2rem;
+                        padding: 1rem;
+                        margin-bottom: 2rem;">
+                        <tr>
+                            <th colspan="2">Técnico</th>
+                        </tr>
+                            
+                        <tr>
+                            <th>Nombre</th>
+                            <td><%= data.orden[i].tecnico[0].name %></td>
+                        </tr>    
+                        <tr>
+                            <th>Cedula de identidad</th>
+                            <td><%= data.orden[i].tecnico[0].ci %></td>
+                        </tr>    
+                        <tr>
+                            <th>Teléfono</th>
+                            <td><%= data.orden[i].tecnico[0].phone %></td>
+                        </tr>    
+                        <tr>
+                            <th>Email</th>
+                            <td><%= data.orden[i].tecnico[0].email %></td>
+                        </tr>
+                    </table>
+                </td>
+                
+                <td>
+                    <table style="
+                        border-radius: .7rem; 
+                        border: solid 1px rgb(14, 98, 209);
+                        background-color: rgba(14, 99, 209, 0.281);
+                        margin-left: 2rem;
+                        padding: 1rem;
+                        margin-bottom: 2rem;">
+                        <tr>
+                            <th colspan="2">Cliente</th>
+                        </tr>
+                            
+                        <tr>
+                            <th>Nombre</th>
+                            <td><%= data.orden[i].customer[0].name %></td>
+                        </tr>    
+                        <tr>
+                            <th>Cedula de identidad</th>
+                            <td><%= data.orden[i].customer[0].ci %></td>
+                        </tr>    
+                        <tr>
+                            <th>Teléfono</th>
+                            <td><%= data.orden[i].customer[0].phone %></td>
+                        </tr>    
+                        <tr>
+                            <th>Email</th>
+                            <td><%= data.orden[i].customer[0].email %></td>
+                        </tr>
+                    </table>
+                </td>            
+            </table>
+            
+            <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+                <b>Descripcion:</b>   <%= data.orden[i].description %>
+             </p>
+            <table style="
+                border-radius: .7rem; 
+                border: solid 1px rgb(14, 98, 209);
+                margin-left: 17rem;
+                padding: 1rem;
+                margin-top: 1.5rem;">
+                <tr>
+                    <th colspan="3">Historial de estatus</th>
+                </tr>
+                    
+                <tr>
+                    <th align="center">Estatus</th>
+                    <th align="center">Fecha</th>
+                </tr>
+                <% for(var j=0; j<data.orden[i].historic.length; j++) { %>
+                    <tr>
+                        <td><%= data.orden[i].historic[j].status %></td>
+                        <td><%= data.orden[i].historic[j].date.toLocaleDateString() %></td>
+                    </tr>
+                <% } %>
+            </table>
         </div>
         <% } %>
-</div> -->
 </body>
 </html>

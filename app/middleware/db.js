@@ -333,7 +333,6 @@ module.exports = {
    */
   async deleteItem(id, model, user, route) {
     model.findById(id, (err, item) => {
-      itemNotFound(err, item, reject, 'NOT_FOUND')
       auditGlobal('delete', route, user, item)
     })
     return new Promise((resolve, reject) => {

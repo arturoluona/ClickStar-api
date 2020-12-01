@@ -59,7 +59,7 @@ router.post(
 router.get(
   '/token',
   requireAuth,
-  AuthController.roleAuthorization(['user', 'admin']),
+  AuthController.roleAuthorization(['user', 'admin', 'office', 'tecnico']),
   trimRequest.all,
   controller.getRefreshToken,
   db.auditoriaMethods

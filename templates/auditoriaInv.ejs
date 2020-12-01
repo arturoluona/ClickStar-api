@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auditoria de Inventario</title>
 </head>
-<body>
+<body style="font-family: Arial, Helvetica, sans-serif;">
     <h2 style="text-align: center;">Auditoria de Inventario</h2>
 
-    <div style="
-            margin-left: 16% !important;">
+    <div>
         <table style="
+            margin-left: 7rem !important;
             font-family: 'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;
             font-size: 12px;
             margin: 45px;
@@ -50,6 +50,16 @@
                     border-bottom: 1px solid #fff; 
                     color: #039; 
                 ">Cantidad</th>
+                <th style="
+                    text-align: center;
+                    font-size: 13px;     
+                    font-weight: normal;     
+                    padding: 8px;     
+                    background: #b9c9fe;
+                    border-top: 4px solid #aabcfe;    
+                    border-bottom: 1px solid #fff; 
+                    color: #039; 
+                ">Fecha</th>
             </tr>
             
             <% for(var i=0; i<data.length; i++) {%>
@@ -91,6 +101,15 @@
                     border-top: 1px solid transparent;
                 ">
                     <%= data[i].qty %>
+                </td>
+                <td style="
+                    padding: 8px;     
+                    background: #e8edff;     
+                    border-bottom: 1px solid #fff;
+                    color: #669;      
+                    border-top: 1px solid transparent;
+                ">
+                    <%= data[i].createdAt.toLocaleDateString() %>
                 </td>
             </tr>
         
