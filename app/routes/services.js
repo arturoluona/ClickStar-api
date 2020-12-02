@@ -20,8 +20,6 @@ const trimRequest = require('trim-request')
  */
 router.get(
   '/',
-  requireAuth,
-  AuthController.roleAuthorization(['user', 'admin', 'office', 'tecnico']),
   trimRequest.all,
   controller.getItems,
   db.auditoriaMethods

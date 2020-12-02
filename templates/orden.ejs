@@ -5,83 +5,393 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orden</title>
 </head>
-<body>  
-    <h2 style="text-align: center; background-color: rgba(47, 66, 236, 0.705); color: white;">Orden</h2>
+<body style="font-family: Arial, Helvetica, sans-serif;">  
+    <h2 style="
+        text-align: center; 
+        border-radius: 2rem;
+        width: 15rem;
+        margin-left: 16rem;
+        padding: .5rem;
+        background-color: rgba(47, 66, 236, 0.705); 
+        color: white;">
+        Orden
+    </h2>
 
-    <div style=" border: solid 1px rgb(14, 98, 209);">
-        <div style="padding-left: 10px;">
-    <h3 style="padding-left: 20px; padding-top: 10px;">ID: <%= data.idOrden %></h3>
-    <h3 style="position: relative;">cliente: <%= data.customer[0].name %></h3>
-    <h4 style="position: relative; top: -40px; left: 50%;">Tecnico <%= data.tecnico[0].name %></h4>
-    <h4 style="position: relative; top: -40px; left: 50%;">Status: <%= data.status %></h4>
-    <p style="position: relative; top: -40px; text-align: center; padding: 10px;"> <%= data.description %></p>
-    </div>
-</div> 
+    <div style="
+        border-radius: .7rem; 
+        margin-bottom: 2rem; 
+        border: solid 1px rgb(14, 98, 209);
+        padding: 2rem;">
+        <div>
+            <span><b>Id:</b> <%= data.idOrden %></span>
+            <span style="margin-left: 13rem;"><b>Precio:</b> <%= data.price %></span>
+            <span style="margin-left: 12rem;"><b>Fecha</b> <%= data.createdAt.toLocaleDateString() %></span> 
+        </div>
+        
+        <table style="margin-top: 2rem;">   
+            <td>
+                <table style="
+                    border-radius: .7rem; 
+                    border: solid 1px rgb(14, 98, 209);
+                    background-color: rgba(14, 99, 209, 0.281);
+                    margin-left: 2rem;
+                    padding: 1rem;
+                    margin-bottom: 2rem;">
+                    <tr>
+                        <th colspan="2">Técnico</th>
+                    </tr>
+                        
+                    <tr>
+                        <th>Nombre</th>
+                        <td><%= data.tecnico[0].name %></td>
+                    </tr>    
+                    <tr>
+                        <th>Cedula de identidad</th>
+                        <td><%= data.tecnico[0].ci %></td>
+                    </tr>    
+                    <tr>
+                        <th>Teléfono</th>
+                        <td><%= data.tecnico[0].phone %></td>
+                    </tr>    
+                    <tr>
+                        <th>Email</th>
+                        <td><%= data.tecnico[0].email %></td>
+                    </tr>
+                </table>
+            </td>
+            
+            <td>
+                <table style="
+                    border-radius: .7rem; 
+                    border: solid 1px rgb(14, 98, 209);
+                    background-color: rgba(14, 99, 209, 0.281);
+                    margin-left: 2rem;
+                    padding: 1rem;
+                    margin-bottom: 2rem;">
+                    <tr>
+                        <th colspan="2">Cliente</th>
+                    </tr>
+                        
+                    <tr>
+                        <th>Nombre</th>
+                        <td><%= data.customer[0].name %></td>
+                    </tr>    
+                    <tr>
+                        <th>Cedula de identidad</th>
+                        <td><%= data.customer[0].ci %></td>
+                    </tr>    
+                    <tr>
+                        <th>Teléfono</th>
+                        <td><%= data.customer[0].phone %></td>
+                    </tr>    
+                    <tr>
+                        <th>Email</th>
+                        <td><%= data.customer[0].email %></td>
+                    </tr>
+                </table>
+            </td>            
+        </table>
+        
+        <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+            <b>Descripcion:</b>   <%= data.description %>
+            </p>
+        <table style="
+            border-radius: .7rem; 
+            border: solid 1px rgb(14, 98, 209);
+            margin-left: 17rem;
+            padding: 1rem;
+            margin-top: 1.5rem;">
+            <tr>
+                <th colspan="3">Historial de estatus</th>
+            </tr>
+                
+            <tr>
+                <th align="center">Estatus</th>
+                <th align="center">Fecha</th>
+            </tr>
+            <% for(var j=0; j<data.historic.length; j++) { %>
+                <tr>
+                    <td><%= data.historic[j].status %></td>
+                    <td><%= data.historic[j].date.toLocaleDateString() %></td>
+                </tr>
+            <% } %>
+        </table>
+    </div> 
 
     <% if (data.typeDevice.value === 'devicePc') { %>
-        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
-            <h2 style=""><%= data.typeDevice.name %></h2>
-            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
-            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
-            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
-            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.ram %></h4>
-            <p style="position: relative; top: -40px; text-align: center; padding: 10px;"> <%= data.device.label.description %></p>
-            
-        </div>
-    <% } %>
-    <% if (data.typeDevice.value === 'deviceRouter') { %>
-        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
-            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
-            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
-            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
-            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.loader %></h4>
-            <p style="position: relative; top: -40px; text-align: center; padding: 10px; margin-bottom: 0;"> <%= data.device.label.description %></p>
-            
-        </div>
-    <% } %>
-    <% if (data.typeDevice.value === 'devicePrinter') { %>
-        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
-            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
-            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
-            <h4 style="position: relative; top: -40px; margin-bottom: 0;"> Serial: <%= data.device.label.serial %></h4>
-            <h4 style="position: relative; top: -50px; margin-bottom: 0;"> Cabezal: <%= data.device.label.cabezal %></h4>
-            <h4 style="position: relative; top: -80px; left: 50%; margin-bottom: 0;">Precio: <%= data.price %></h4>
-            <table style=" position: relative; top: -50px;">
-                <tr style="">
-                    <th>
-                        <h4 style="padding-left: 10px;">Tinta: <%= data.device.label.tinta[0].display %></h4>
-                    </th>
-                    <th>
-                        <h4 style="padding-left: 10px;">Tinta: <%= data.device.label.tinta[1].display %></h4>
-                    </th>
-                    <th>
-                        <h4 style="padding-left: 10px;">Tinta: <%= data.device.label.tinta[2].display %></h4>
-                    </th>
-                </tr>
+        <h2 style="
+            text-align: center; 
+            border-radius: 2rem;
+            padding: .5rem;
+            background-color: rgba(47, 66, 236, 0.705); 
+            color: white;">
+            Dispositivo PC's
+        </h2>
+        <div style="
+            margin-bottom: 15rem; 
+            text-align: center;  
+            border-radius: .7rem; 
+            border: solid 1px rgb(14, 98, 209);">
+
+            <div style="margin-left: 6rem; width: 35rem; padding: .5rem;">
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b> Modelo: </b><%= data.device.label.model %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Marca: </b><%= data.device.label.make %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Serial:</b> <%= data.device.label.serial %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Cargador:</b> <%= data.device.label.loader %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b> Bateria:</b>  <%= data.device.label.batery %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+                <b>Descripcion:</b>   <%= data.device.label.description %>
+                </p>
+            </div>        
+            <table style="margin-left: 6rem;">   
+                <td>
+                    <table style="
+                        border-radius: .7rem; 
+                        border: solid 1px rgb(14, 98, 209);
+                        margin-left: 2rem;
+                        padding: 1rem;
+                        margin-bottom: 2rem;">
+                        <tr>
+                            <th colspan="3">Memorias Ram</th>
+                        </tr>
+                            
+                        <tr>
+                            <th align="center">Versión</th>
+                            <th align="center">Capacidad</th>
+                            <th align="center">Serial</th>
+                        </tr>
+                        <% for(var i=0; i<data.device.label.ram.length; i++) { %>
+                            <tr>
+                                <td><%= data.device.label.ram[i].version %></td>
+                                <td><%= data.device.label.ram[i].capacity %></td>
+                                <td><%= data.device.label.ram[i].serial %></td>
+                            </tr>
+                        <% } %>
+                    </table>
+                </td>
+                
+                <td>
+                    <table style="
+                        border-radius: .7rem; 
+                        border: solid 1px rgb(14, 98, 209);
+                        margin-left: 2rem;
+                        padding: 1rem;
+                        margin-bottom: 2rem;">
+                        <tr>
+                            <th colspan="3">Disco Duros</th>
+                        </tr>
+                            
+                        <tr>
+                            <th align="center">Modelo</th>
+                            <th align="center">Capacidad</th>
+                            <th align="center">Serial</th>
+                        </tr>
+                        <% for(var i=0; i<data.device.label.hdd.length; i++) { %>
+                            <tr>
+                                <td><%= data.device.label.hdd[i].model %></td>
+                                <td><%= data.device.label.hdd[i].capacity %></td>
+                                <td><%= data.device.label.hdd[i].serial %></td>
+                            </tr>
+                        <% } %>
+                    </table>
+                </td>            
             </table>
             
-            <p style="position: relative; top: -70px; text-align: center; padding: 10px;"> <%= data.device.label.description %></p>
-            
+            <table style="
+                border-radius: .7rem; 
+                border: solid 1px rgb(14, 98, 209);
+                margin-left: 20rem;
+                padding: 1rem;
+                margin-bottom: 2rem;">
+                <tr>
+                    <th colspan="2">Procesador</th>
+                </tr>
+                    
+                <tr>
+                    <th>Cache</th>
+                    <td><%= data.device.label.processor.cache %></td>
+                </tr>    
+                <tr>
+                    <th>Modelo</th>
+                    <td><%= data.device.label.processor.model %></td>
+                </tr>    
+                <tr>
+                    <th>Marca</th>
+                    <td><%= data.device.label.processor.make %></td>
+                </tr>    
+                <tr>
+                    <th>Serial</th>
+                    <td><%= data.device.label.processor.serial %></td>
+                </tr>
+            </table>
+
         </div>
     <% } %>
+
+
+
+
+
+    <% if (data.typeDevice.value === 'deviceRouter') { %>
+        <h2 style="
+            text-align: center; 
+            border-radius: 2rem;
+            padding: .5rem;
+            background-color: rgba(47, 66, 236, 0.705); 
+            color: white;">
+            Dispositivo Router/Modems
+        </h2>
+        <div style="
+            margin-bottom: 40rem; 
+            text-align: center;  
+            border-radius: .7rem; 
+            border: solid 1px rgb(14, 98, 209);">
+
+            <div style="margin-left: 6rem; width: 35rem; padding: .5rem;">
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b> Modelo: </b><%= data.device.label.model %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Marca: </b><%= data.device.label.make %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Serial:</b> <%= data.device.label.serial %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                    <b>Cargador: </b><%= data.device.label.loader %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+                <b>Descripcion:</b>   <%= data.device.label.description %>
+                </p>
+            </div>        
+        </div>
+    <% } %>
+
+
+
+
+    <% if (data.typeDevice.value === 'devicePrinter') { %>
+        <h2 style="
+            text-align: center; 
+            border-radius: 2rem;
+            padding: .5rem;
+            background-color: rgba(47, 66, 236, 0.705); 
+            color: white;">
+            Dispositivo Impresora
+        </h2>
+        <div style="
+            margin-bottom: 40rem; 
+            text-align: center;  
+            border-radius: .7rem; 
+            border: solid 1px rgb(14, 98, 209);">
+
+            <div style="margin-left: 6rem; width: 35rem; padding: .5rem;">
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b> Modelo: </b><%= data.device.label.model %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Marca: </b><%= data.device.label.make %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Serial:</b> <%= data.device.label.serial %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+                <b>Tinta:</b>   
+                <% for(var i=0; i<data.device.label.tinta.length; i++) { %>
+                    <%= data.device.label.tinta[i] %>, 
+                <% } %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+                <b>Descripcion:</b>   <%= data.device.label.description %>
+                </p>
+                
+            </div>        
+        </div>
+    <% } %>
+
+
+
+
     <% if (data.typeDevice.value === 'deviceOthers') { %>
-        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
-            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
-            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
-            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
-            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.loader %></h4>
-            <p style="position: relative; top: -40px; text-align: center; padding: 10px; margin-bottom: 0;"> <%= data.device.label.description %></p>
-            
+        <h2 style="
+            text-align: center; 
+            border-radius: 2rem;
+            padding: .5rem;
+            background-color: rgba(47, 66, 236, 0.705); 
+            color: white;">
+            Dispositivo Otros
+        </h2>
+        <div style="
+            margin-bottom: 40rem; 
+            text-align: center;  
+            border-radius: .7rem; 
+            border: solid 1px rgb(14, 98, 209);">
+
+            <div style="margin-left: 6rem; width: 35rem; padding: .5rem;">
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                    <b> Nombre de equipo: </b><%= data.device.label.name %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b> Modelo: </b><%= data.device.label.model %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Marca: </b><%= data.device.label.make %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Serial:</b> <%= data.device.label.serial %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+                <b>Descripcion:</b>   <%= data.device.label.description %>
+                </p>
+            </div>        
         </div>
     <% } %>
+
+
+
+
     <% if (data.typeDevice.value === 'deviceMonitor') { %>
-        <div style="border: solid 1px rgb(14, 98, 209); padding-left: 10px;">
-            <h3 style="position: relative;">Marca: <%= data.device.label.make %></h3>
-            <h4 style="position: relative; top: -40px; left: 50%;">Modelo: <%= data.device.label.model %></h4>
-            <h4 style="position: relative; top: -40px;"> Serial: <%= data.device.label.serial %></h4>
-            <h4 style="position: relative; top: -40px; left: 50%;">Cargador: <%= data.device.label.inch %></h4>
-            <p style="position: relative; top: -40px; text-align: center; padding: 10px; margin-bottom: 0;"> <%= data.device.label.description %></p>
-            
+        <h2 style="
+            text-align: center; 
+            border-radius: 2rem;
+            padding: .5rem;
+            background-color: rgba(47, 66, 236, 0.705); 
+            color: white;">
+            Dispositivo Monitor
+        </h2>
+        <div style="
+            margin-bottom: 40rem; 
+            text-align: center;  
+            border-radius: .7rem; 
+            border: solid 1px rgb(14, 98, 209);">
+
+            <div style="margin-left: 6rem; width: 35rem; padding: .5rem;">
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b> Modelo: </b><%= data.device.label.model %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Marca: </b><%= data.device.label.make %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Serial:</b> <%= data.device.label.serial %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 2rem; margin-bottom: .5rem;">
+                <b>  Pulgadas:</b> <%= data.device.label.inch %>
+                </p>
+                <p style=" padding: .5rem; background-color: rgb(209, 219, 255); border-radius: 1rem; margin-bottom: .5rem;">
+                <b>Descripcion:</b>   <%= data.device.label.description %>
+                </p>
+            </div>        
         </div>
     <% } %>
 </body>
