@@ -25,6 +25,16 @@ router.get(
   controller.getItems
 )
 
+
+/*
+ * Get items route
+ */
+router.get(
+  '/id-order/:id',
+  trimRequest.all,
+  controller.getItemsSearch
+)
+
 /*
  * Create new item route
  */

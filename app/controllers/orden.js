@@ -25,6 +25,21 @@ exports.getItems = async (req, res) => {
 }
 
 /**
+ * Get items function called by route
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ */
+ exports.getItemsSearch = async (req, res) => {
+  try {
+    const query = await db.checkQueryString(req.query)
+    const aggregation = db.getItemsAggregationEmpty(model, query)
+    res.status(200).json(await db.getItemsAggregate(req, model, aggregation))
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+/**
  * Get item function called by route
  * @param {Object} req - request object
  * @param {Object} res - response object

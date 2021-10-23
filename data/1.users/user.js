@@ -18,7 +18,7 @@ module.exports = [
     updatedAt: faker.date.recent()
   },
   {
-    _id: new ObjectID('5aa1c2c35ef7a4e97b5e995b'),
+    _id: new ObjectID('60d273a8f3729946d0bf49b7'),
     name: 'Customer user',
     ci: '11111111',
     email: 'user@user.com',
@@ -33,7 +33,7 @@ module.exports = [
     updatedAt: faker.date.recent()
   },
   {
-    _id: new ObjectID('5aa1c2c35ef7a4e97b5e995b'),
+    _id: new ObjectID('60d277e7f3729946d0bf49b8'),
     name: 'Tecnico user',
     ci: '33333333',
     email: 'user@user.com',
@@ -48,7 +48,7 @@ module.exports = [
     updatedAt: faker.date.recent()
   },
   {
-    _id: new ObjectID('5aa1c2c35ef7a4e97b5e995b'),
+    _id: new ObjectID('60d27adff3729946d0bf49b9'),
     name: 'Office user',
     ci: '44444444',
     email: 'user@user.com',
