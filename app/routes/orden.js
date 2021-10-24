@@ -39,6 +39,16 @@ router.get(
 )
 
 /*
+ * Get items route
+ */
+router.get(
+  '/ci/:id',
+  trimRequest.all,
+  validate.getItem,
+  controller.getItemsByCi
+)
+
+/*
  * Create new item route
  */
 router.post(

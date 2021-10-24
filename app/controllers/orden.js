@@ -1,9 +1,23 @@
 const model = require('../models/orden')
+const userModel = require('../models/user')
 const { matchedData } = require('express-validator')
 const utils = require('../middleware/utils')
 const db = require('../middleware/db')
 const serviceOrder = require('../services/orden')
 const mongoose = require('mongoose')
+
+const getItemsOrdenByCi = (ci) => {
+  return new Promise((resolve, reject) => {
+    userModel.findOne({ci}).then((a) => {
+      if(a) {
+        model.find({customer: mongoose.Types.ObjectId(a._id)})
+          .then((res) => resolve(res))
+          .catch((err) => reject(err))
+      } else reject({code: 404, message: 'NOT_FOUND'})
+    })
+    .catch((err) => reject(err))
+  })
+}
 
 /********************
  * Public functions *
@@ -30,10 +44,25 @@ exports.getItems = async (req, res, next) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
- exports.getItemsSearch = async (req, res) => {
+exports.getItemsSearch = async (req, res) => {
   try {
     req = matchedData(req)
     const resp = await model.findOne({idOrden: req.id})
+    res.status(200).json(resp)
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+/**
+ * Get items function called by route
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ */
+exports.getItemsByCi = async (req, res) => {
+  try {
+    const { id } = matchedData(req)
+    const resp = await getItemsOrdenByCi(id)
     res.status(200).json(resp)
   } catch (error) {
     utils.handleError(res, error)

@@ -114,8 +114,8 @@ module.exports = [
       label: {
         _id: '5fbf0ed62965181c60172956',
         name: faker.name.prefix(),
-        model: faker.random.words(5),
-        make: faker.company.companyName(5),
+        model: faker.random.words(1),
+        make: faker.company.companyName(1),
         serial: faker.random.uuid(),
         description: faker.lorem.text(15),
         createdAt: faker.date.past(),
@@ -147,11 +147,11 @@ module.exports = [
     status: 'delivered',
     device: {
       _id:  new ObjectID('5fbf0ed62965181c60172655'),
-      label: {        
+      label: {
         _id: '5fbf0ed62965181c60172655',
         name: faker.name.prefix(),
-        model: faker.random.words(5),
-        make: faker.company.companyName(5),
+        model: faker.random.words(1),
+        make: faker.company.companyName(1),
         serial: faker.random.uuid(),
         description: faker.lorem.text(15),
         createdAt: faker.date.past(),
@@ -347,8 +347,8 @@ module.exports = [
             serial: faker.random.alphaNumeric(9)
           }
         ],
-        model: faker.random.words(5),
-        make: faker.company.companyName(5),
+        model: faker.random.words(1),
+        make: faker.company.companyName(1),
         serial: faker.random.uuid(),
         hdd: [
           {
@@ -410,8 +410,8 @@ module.exports = [
             serial: faker.random.alphaNumeric(9)
           }
         ],
-        model: faker.random.words(5),
-        make: faker.company.companyName(5),
+        model: faker.random.words(1),
+        make: faker.company.companyName(1),
         serial: faker.random.uuid(),
         hdd: [
           {
