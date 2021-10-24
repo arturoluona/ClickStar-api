@@ -1,6 +1,7 @@
 const controller = require('../controllers/devicePc')
 const validate = require('../controllers/devicePc.validate')
 const AuthController = require('../controllers/auth')
+const db = require('../middleware/db')
 const express = require('express')
 const router = express.Router()
 require('../../config/passport')
@@ -22,7 +23,8 @@ router.get(
   requireAuth,
   AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
-  controller.getItems
+  controller.getItems,
+  db.auditoriaMethods
 )
 
 /*
@@ -34,7 +36,8 @@ router.post(
   AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.createItem,
-  controller.createItem
+  controller.createItem,
+  db.auditoriaMethods
 )
 
 /*
@@ -43,10 +46,11 @@ router.post(
 router.get(
   '/:id',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
+  AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.getItem,
-  controller.getItem
+  controller.getItem,
+  db.auditoriaMethods
 )
 
 /*
@@ -58,7 +62,8 @@ router.patch(
   AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.updateItem,
-  controller.updateItem
+  controller.updateItem,
+  db.auditoriaMethods
 )
 
 /*
@@ -70,7 +75,8 @@ router.delete(
   AuthController.roleAuthorization(['admin', 'office']),
   trimRequest.all,
   validate.deleteItem,
-  controller.deleteItem
+  controller.deleteItem,
+  db.auditoriaMethods
 )
 
 module.exports = router

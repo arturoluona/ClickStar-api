@@ -1,4 +1,3 @@
-
 require('dotenv-safe').config()
 const { Seeder } = require('mongo-seeding')
 const path = require('path')
@@ -6,9 +5,10 @@ const config = {
   database: process.env.MONGO_URI,
   inputPath: path.resolve(__dirname, './data'),
   dropDatabase: false,
-  databaseReconnectTimeout: 30000,
+  databaseReconnectTimeout: 100000,
   dropCollections: true
 }
+
 const seeder = new Seeder(config)
 const collections = seeder.readCollectionsFromPath(path.resolve('./data'))
 

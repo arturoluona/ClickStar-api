@@ -23,6 +23,15 @@ exports.getItem = (id, model) =>
                     $and: [{ $eq: ['$$idUser', '$_id'] }]
                   }
                 }
+              },
+              {
+                $project: {
+                  name: 1,
+                  ci: 1,
+                  email: 1,
+                  phone: 1,
+                  country: 1
+                }
               }
             ],
             as: 'customer'
@@ -38,6 +47,15 @@ exports.getItem = (id, model) =>
                   $expr: {
                     $and: [{ $eq: ['$$idUser', '$_id'] }]
                   }
+                }
+              },
+              {
+                $project: {
+                  name: 1,
+                  ci: 1,
+                  email: 1,
+                  phone: 1,
+                  country: 1
                 }
               }
             ],

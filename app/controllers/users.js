@@ -54,10 +54,35 @@ const createItem = async (req) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getItems = async (req, res) => {
+exports.getItemsCustomer = async (req, res, next) => {
+  try {
+    const { user, originalUrl } = req
+    const query = await db.checkQueryString(req.query)
+    const aggregation = db.getItemsUsers(model, query, 'user')
+    res.status(200).json(await db.getItemsAggregate(req, model, aggregation))
+    next()
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+exports.getItems = async (req, res, next) => {
+  try {
+    const { user, originalUrl } = req
+    const query = await db.checkQueryString(req.query)
+    res.status(200).json(await db.getItems(req, model, query, user, originalUrl))
+    next()
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+exports.getItemsEmpleados = async (req, res, next) => {
   try {
     const query = await db.checkQueryString(req.query)
-    res.status(200).json(await db.getItems(req, model, query))
+    const aggregation = db.getItemsUsers(model, query, 'empleados')
+    res.status(200).json(await db.getItemsAggregate(req, model, aggregation))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -68,11 +93,13 @@ exports.getItems = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.getItem = async (req, res) => {
+exports.getItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.getItem(id, model))
+    res.status(200).json(await db.getItem(id, model, user, originalUrl))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -83,8 +110,9 @@ exports.getItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.updateItem = async (req, res) => {
+exports.updateItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
     const doesEmailExists = await emailer.emailExistsExcludingMyself(
@@ -92,8 +120,9 @@ exports.updateItem = async (req, res) => {
       req.email
     )
     if (!doesEmailExists) {
-      res.status(200).json(await db.updateItem(id, model, req))
+      res.status(200).json(await db.updateItem(id, model, req, user, originalUrl))
     }
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -104,7 +133,7 @@ exports.updateItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.createItem = async (req, res) => {
+exports.createItem = async (req, res, next) => {
   try {
     // Gets locale from header 'Accept-Language'
     const locale = req.getLocale()
@@ -115,6 +144,7 @@ exports.createItem = async (req, res) => {
       emailer.sendRegistrationEmailMessage(locale, item)
       res.status(201).json(item)
     }
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }
@@ -125,11 +155,13 @@ exports.createItem = async (req, res) => {
  * @param {Object} req - request object
  * @param {Object} res - response object
  */
-exports.deleteItem = async (req, res) => {
+exports.deleteItem = async (req, res, next) => {
   try {
+    const { user, originalUrl } = req
     req = matchedData(req)
     const id = await utils.isIDGood(req.id)
-    res.status(200).json(await db.deleteItem(id, model))
+    res.status(200).json(await db.deleteItem(id, model, user, originalUrl))
+    next()
   } catch (error) {
     utils.handleError(res, error)
   }

@@ -19,7 +19,7 @@ const devicePrinterSchema = new mongoose.Schema(
       type: String
     },
     tinta: {
-      type: String
+      type: Array
     },
     description: {
       type: String

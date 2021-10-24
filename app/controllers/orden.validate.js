@@ -11,6 +11,12 @@ exports.createItem = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
+  check('typeDevice')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('tecnico')
     .exists()
     .withMessage('MISSING')
@@ -18,11 +24,7 @@ exports.createItem = [
     .isEmpty()
     .withMessage('IS_EMPTY'),
   check('price')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
+  .optional(),
   check('status')
     .exists()
     .withMessage('MISSING')
@@ -30,12 +32,7 @@ exports.createItem = [
     .isEmpty()
     .withMessage('IS_EMPTY'),
   check('description')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY')
-    .trim(),
+  .optional(),
   check('device')
     .exists()
     .withMessage('MISSING')
@@ -56,7 +53,13 @@ exports.updateItem = [
     .withMessage('MISSING')
     .not()
     .isEmpty()
-    .withMessage('IS_EMPTY'),  
+    .withMessage('IS_EMPTY'),
+  check('typeDevice')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('tecnico')
     .exists()
     .withMessage('MISSING')
@@ -64,11 +67,7 @@ exports.updateItem = [
     .isEmpty()
     .withMessage('IS_EMPTY'),
   check('price')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
+  .optional(),
   check('status')
     .exists()
     .withMessage('MISSING')
@@ -76,12 +75,7 @@ exports.updateItem = [
     .isEmpty()
     .withMessage('IS_EMPTY'),
   check('description')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY')
-    .trim(),
+    .optional(),
   check('device')
     .exists()
     .withMessage('MISSING')

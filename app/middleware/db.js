@@ -1,10 +1,15 @@
 const mongoose = require('mongoose')
+const { matchedData } = require('express-validator')
+const auditoriaMethod = require('../models/auditoriaMethods')
+const auditoriaGlobal = require('../models/auditoriaGlobal')
+const auditoriaInv = require('../models/auditoriaInv')
 
 const {
   buildSuccObject,
   buildErrObject,
   itemNotFound
 } = require('../middleware/utils')
+const { model } = require('../models/auditoriaMethods')
 
 /**
  * Builds sorting
@@ -15,6 +20,60 @@ const buildSort = (sort, order) => {
   const sortBy = {}
   sortBy[sort] = order
   return sortBy
+}
+
+const auditGlobal = async (method, route, user, data = {}, before = {}) => {
+  let send
+  if(method === 'all') {
+    send = {
+      user,
+      route,
+      before: 'all',
+      after: 'all',
+    }
+  }
+
+  if(method === 'post') {
+    send = {
+      user,
+      route,
+      before: 'new',
+      after: data,
+    }
+  }
+
+  if(method === 'patch') {
+    send = {
+      user,
+      route,
+      before,
+      after: data,
+    }
+  }
+
+  if(method === 'get') {
+    send = {
+      user,
+      route,
+      before: 'get',
+      after: data,
+    }
+  }
+
+  if(method === 'delete') {
+    send = {
+      user,
+      route,
+      before: data,
+      after: 'deleted',
+    }
+  }
+
+  auditoriaGlobal.create(send, (err) => {
+    if (err) {
+      console.log(err.message)
+    }
+  })
 }
 
 /**
@@ -36,7 +95,7 @@ const listInitOptions = async (req) => {
     const sort = req.query.sort || 'createdAt'
     const sortBy = buildSort(sort, order)
     const page = parseInt(req.query.page, 10) || 1
-    const limit = parseInt(req.query.limit, 10) || 5
+    const limit = parseInt(req.query.limit, 10) || 1000
     const options = {
       sort: sortBy,
       lean: true,
@@ -89,6 +148,39 @@ module.exports = {
   },
 
   /**
+   * Auditar las consultas
+   * @param {Object} req - query object
+   */
+  async auditoriaMethods(req) {
+    try {
+      const send = {
+        user: req.user ? req.user : 'sin usuario',
+        method: req.method,
+        rute: req.originalUrl
+      }
+      auditoriaMethod.create(send, (err) => {
+        if (err) {
+          console.log(err.message)
+        }
+      })
+    } catch (err) {
+      console.log(err.message)
+    }
+  },
+
+  async auditoriaInventory(req) {
+    try {
+      auditoriaInv.create(req, (err) => {
+        if (err) {
+          console.log(err.message)
+        }
+      })
+    } catch (err) {
+      console.log(err.message)
+    }
+  },
+
+  /**
    * If user is admin search all ordenes with devices
    * If user is user search all ordenes by tecnico with devices
    * @param {Object} dataUser - query object
@@ -113,10 +205,41 @@ module.exports = {
       query = {
         ...query,
         ...{
-          $and: [
-            { 'tecnico': mongoose.Types.ObjectId(dataUser._id) }
-          ]
+          $and: [{ tecnico: mongoose.Types.ObjectId(dataUser._id) }]
         }
+      }
+    }
+    return model.aggregate([
+      {
+        $match: query
+      }
+    ])
+  },
+
+  /**
+   * Get user for role
+   * @param {Object} dataUser - query object
+   * @param {Object} query - query object
+   */
+  getItemsUsers(model, query = {}, role) {
+    if(role === 'user') {
+      query = {
+        ...query,
+        ...{
+          $and: [{ role }]
+        }
+      }
+    }
+    if(role === 'empleados') {
+      query = {
+        $or: [
+          { role: 'office' },
+          { role: 'admin' },
+          { role: 'tecnico' }
+        ],
+        $and: [
+          query
+        ]
       }
     }
     return model.aggregate([
@@ -149,8 +272,10 @@ module.exports = {
    * @param {Object} req - request object
    * @param {Object} query - query object
    */
-  async getItems(req, model, query) {
+  async getItems(req, model, query, user, route) {
     const options = await listInitOptions(req)
+    if(!(req.originalUrl.toString().includes('pdf')))
+      auditGlobal('all', route, user)
     return new Promise((resolve, reject) => {
       model.paginate(query, options, (err, items) => {
         if (err) {
@@ -165,10 +290,12 @@ module.exports = {
    * Gets item from database by id
    * @param {string} id - item id
    */
-  async getItem(id, model) {
+  async getItem(id, model, user = {}, route) {
     return new Promise((resolve, reject) => {
       model.findById(id, (err, item) => {
         itemNotFound(err, item, reject, 'NOT_FOUND')
+        if(!(route.toString().includes('pdf')))
+          auditGlobal('get', route, user, item)
         resolve(item)
       })
     })
@@ -178,12 +305,13 @@ module.exports = {
    * Creates a new item in database
    * @param {Object} req - request object
    */
-  async createItem(req, model) {
+  async createItem(req, model, user, route) {
     return new Promise((resolve, reject) => {
       model.create(req, (err, item) => {
         if (err) {
           reject(buildErrObject(422, err.message))
         }
+        auditGlobal('post', route, user, item)
         resolve(item)
       })
     })
@@ -194,7 +322,8 @@ module.exports = {
    * @param {string} id - item id
    * @param {Object} req - request object
    */
-  async updateItem(id, model, req) {
+  async updateItem(id, model, req, user, route) {
+    const before = await model.findById(id)
     return new Promise((resolve, reject) => {
       model.findByIdAndUpdate(
         id,
@@ -205,6 +334,7 @@ module.exports = {
         },
         (err, item) => {
           itemNotFound(err, item, reject, 'NOT_FOUND')
+          auditGlobal('patch', route, user, item, before)
           resolve(item)
         }
       )
@@ -215,7 +345,10 @@ module.exports = {
    * Deletes an item from database by id
    * @param {string} id - id of item
    */
-  async deleteItem(id, model) {
+  async deleteItem(id, model, user, route) {
+    model.findById(id, (err, item) => {
+      auditGlobal('delete', route, user, item)
+    })
     return new Promise((resolve, reject) => {
       model.findByIdAndRemove(id, (err, item) => {
         itemNotFound(err, item, reject, 'NOT_FOUND')
