@@ -26,6 +26,21 @@ exports.getItems = async (req, res, next) => {
 }
 
 /**
+ * Get items function called by route
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ */
+ exports.getItemsSearch = async (req, res) => {
+  try {
+    req = matchedData(req)
+    const resp = await model.findOne({idOrden: req.id})
+    res.status(200).json(resp)
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+/**
  * Get item function called by route
  * @param {Object} req - request object
  * @param {Object} res - response object

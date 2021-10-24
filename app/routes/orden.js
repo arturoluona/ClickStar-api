@@ -27,6 +27,17 @@ router.get(
   db.auditoriaMethods
 )
 
+
+/*
+ * Get items route
+ */
+router.get(
+  '/id-order/:id',
+  trimRequest.all,
+  validate.getItem,
+  controller.getItemsSearch
+)
+
 /*
  * Create new item route
  */

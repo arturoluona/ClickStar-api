@@ -186,6 +186,20 @@ module.exports = {
    * @param {Object} dataUser - query object
    * @param {Object} query - query object
    */
+  getItemsAggregationEmpty(model, query = {}, dataUser) {
+    return model.aggregate([
+      {
+        $match: query
+      }
+    ])
+  },
+
+  /**
+   * If user is admin search all ordenes with devices
+   * If user is user search all ordenes by tecnico with devices
+   * @param {Object} dataUser - query object
+   * @param {Object} query - query object
+   */
   getItemsOrdenByUser(model, query = {}, dataUser) {
     if (dataUser.role === 'tecnico') {
       query = {
