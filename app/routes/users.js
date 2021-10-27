@@ -30,7 +30,7 @@ router.get(
 router.get(
   '/customers',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office']),
+  AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
   controller.getItemsCustomer,
   db.auditoriaMethods

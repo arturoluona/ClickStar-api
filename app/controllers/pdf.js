@@ -18,15 +18,15 @@ const fs = require('fs')
 const pdf = require('html-pdf')
 
 
-const options = { 
-  format: 'A4', 
+const options = {
+  format: 'A4',
   header: {
-    height: "10mm", 
+    height: "10mm",
   },
   footer: {
-    height: "15mm", 
+    height: "15mm",
     contents: {
-      default: '<p style="color: #9c9c9c; text-align: center; margin-top: .5rem"> ClickStar </p>', // fallback value
+      default: '<p style="color: #9c9c9c; text-align: center; margin-top: .5rem"> Bios </p>', // fallback value
     }
   }
 }
@@ -96,12 +96,12 @@ exports.auditoriaInventory = async (req, res) => {
 exports.deviceMonit = async (req, res) => {
   try {
     req = matchedData(req)
-    const id = await utils.isIDGood(req.id)    
+    const id = await utils.isIDGood(req.id)
     const data = await serviceDevice.getItem(id, deviceMonitor)
     res.render(`${__dirname}/../../templates/deviceMonitor.ejs`,{data}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/deviceMonitor.pdf', function(err, resp) {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/deviceMonitor.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
@@ -116,12 +116,12 @@ exports.deviceMonit = async (req, res) => {
 exports.deviceRoute = async (req, res) => {
   try {
     req = matchedData(req)
-    const id = await utils.isIDGood(req.id)    
+    const id = await utils.isIDGood(req.id)
     const data = await serviceDevice.getItem(id, deviceRouter)
     res.render(`${__dirname}/../../templates/deviceRouter.ejs`,{data}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/deviceRouter.pdf', function(err, resp) {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/deviceRouter.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
@@ -136,12 +136,12 @@ exports.deviceRoute = async (req, res) => {
 exports.deviceRoute = async (req, res) => {
   try {
     req = matchedData(req)
-    const id = await utils.isIDGood(req.id)    
+    const id = await utils.isIDGood(req.id)
     const data = await serviceDevice.getItem(id, deviceRouter)
     res.render(`${__dirname}/../../templates/deviceRouter.ejs`,{data}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/deviceRouter.pdf', function(err, resp) {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/deviceRouter.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
@@ -156,12 +156,12 @@ exports.deviceRoute = async (req, res) => {
 exports.devicePrint = async (req, res) => {
   try {
     req = matchedData(req)
-    const id = await utils.isIDGood(req.id)    
+    const id = await utils.isIDGood(req.id)
     const data = await serviceDevice.getItem(id, devicePrinter)
     res.render(`${__dirname}/../../templates/devicePrinter.ejs`,{data}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/devicePrinter.pdf', function(err, resp) {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/devicePrinter.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
@@ -176,12 +176,12 @@ exports.devicePrint = async (req, res) => {
 exports.devicePC = async (req, res) => {
   try {
     req = matchedData(req)
-    const id = await utils.isIDGood(req.id)    
+    const id = await utils.isIDGood(req.id)
     const data = await serviceDevice.getItem(id, devicePc)
     res.render(`${__dirname}/../../templates/devicePc.ejs`,{data}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/devicePc.pdf', function(err, resp) {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/devicePc.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
@@ -196,12 +196,12 @@ exports.devicePC = async (req, res) => {
 exports.deviceOther = async (req, res) => {
   try {
     req = matchedData(req)
-    const id = await utils.isIDGood(req.id)    
+    const id = await utils.isIDGood(req.id)
     const data = await serviceDevice.getItem(id, deviceOthers)
     res.render(`${__dirname}/../../templates/deviceOthers.ejs`,{data}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/deviceOthers.pdf', function(err, resp) {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/deviceOthers.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
@@ -221,7 +221,7 @@ exports.orden = async (req, res) => {
     res.render(`${__dirname}/../../templates/ordenList.ejs`,{data}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/ordenList.pdf', function(err, resp) {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/ordenList.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
@@ -236,12 +236,13 @@ exports.orden = async (req, res) => {
 exports.ordenId = async (req, res) => {
   try {
     req = matchedData(req)
-    const id = await utils.isIDGood(req.id)    
+    const id = await utils.isIDGood(req.id)
     const data =  await serviceOrder.getItem(id, orden)
+    console.log(data)
     res.render(`${__dirname}/../../templates/orden.ejs`,{data}, (err, html) => {
-      pdf.create(html, options).toFile('../../public/pdf/orden.pdf', function(err, resp) {
+      pdf.create(html, options).toFile('../../public/pdf/orden.pdf', (err, resp) => {
         if (err) console.log(err)
-        else { 
+        else {
           const file = fs.readFileSync('../../public/pdf/orden.pdf')
           res.header('content-type','application/pdf');
           res.send(file)
