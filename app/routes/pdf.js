@@ -63,7 +63,7 @@ router.get(
 )
 
 router.get(
-  '/deviceOther/:id',
+  '/deviceOthers/:id',
   trimRequest.all,
   validate.getItem,
   controller.deviceOther
