@@ -346,13 +346,22 @@ module.exports = {
    * @param {string} id - id of item
    */
   async deleteItem(id, model, user, route) {
+    // model.findById(id, (err, item) => {
+    //   auditGlobal('delete', route, user, item)
+    // })
+    // return new Promise((resolve, reject) => {
+    //   model.findByIdAndRemove(id, (err, item) => {
+    //     itemNotFound(err, item, reject, 'NOT_FOUND')
+    //     resolve(buildSuccObject('DELETED'))
+    //   })
+    // })
     model.findById(id, (err, item) => {
       auditGlobal('delete', route, user, item)
     })
     return new Promise((resolve, reject) => {
-      model.findByIdAndRemove(id, (err, item) => {
-        itemNotFound(err, item, reject, 'NOT_FOUND')
-        resolve(buildSuccObject('DELETED'))
+      model.deleteById(id, (err, item) => {
+        itemNotFound(err, item, reject, 'DOES_NOT_EXIST')
+        resolve(item)
       })
     })
   }

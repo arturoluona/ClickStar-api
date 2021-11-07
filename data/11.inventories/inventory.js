@@ -9,6 +9,7 @@ module.exports = [
     proveedor: faker.company.companyName(2),
     price: 22,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -18,6 +19,7 @@ module.exports = [
     proveedor: faker.company.companyName(2),
     price: 12,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -27,6 +29,7 @@ module.exports = [
     proveedor: faker.company.companyName(2),
     price: 202,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -36,6 +39,7 @@ module.exports = [
     proveedor: faker.company.companyName(2),
     price: 20,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   }
 ]

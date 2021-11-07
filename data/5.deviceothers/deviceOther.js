@@ -10,6 +10,7 @@ module.exports = [
     serial: faker.random.uuid(),
     description: faker.lorem.text(15),
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -20,6 +21,7 @@ module.exports = [
     serial: faker.random.uuid(),
     description: faker.lorem.text(15),
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   }
 ]

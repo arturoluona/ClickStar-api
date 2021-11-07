@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoose_delete = require('mongoose-delete')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const inventorySchema = new mongoose.Schema(
@@ -25,4 +26,5 @@ const inventorySchema = new mongoose.Schema(
   }
 )
 inventorySchema.plugin(mongoosePaginate)
+inventorySchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 module.exports = mongoose.model('inventory', inventorySchema)

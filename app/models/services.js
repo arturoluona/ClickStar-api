@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoose_delete = require('mongoose-delete')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const servicesSchema = new mongoose.Schema(
@@ -26,4 +27,5 @@ const servicesSchema = new mongoose.Schema(
   }
 )
 servicesSchema.plugin(mongoosePaginate)
+servicesSchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 module.exports = mongoose.model('services', servicesSchema)

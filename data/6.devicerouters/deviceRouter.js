@@ -10,6 +10,7 @@ module.exports = [
     serial: 'qwertyuiop345678asdfgh45678',
     description: faker.lorem.text(15),
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -20,6 +21,7 @@ module.exports = [
     serial: '78asdfgh45678',
     description: faker.lorem.text(15),
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   }
 ]

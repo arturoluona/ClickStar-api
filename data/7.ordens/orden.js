@@ -31,6 +31,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -67,6 +68,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -103,6 +105,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -139,6 +142,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -175,6 +179,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -211,6 +216,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -247,6 +253,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -286,6 +293,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -325,6 +333,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -388,6 +397,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -451,6 +461,7 @@ module.exports = [
       }
     ],
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   }
 ]

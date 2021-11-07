@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoose_delete = require('mongoose-delete')
 const nano = require('nanoid/non-secure')
 const aggregatePaginate = require('mongoose-aggregate-paginate-v2')
 
@@ -62,4 +63,5 @@ const ordenSchema = new mongoose.Schema(
 )
 
 ordenSchema.plugin(aggregatePaginate)
+ordenSchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 module.exports = mongoose.model('orden', ordenSchema)
