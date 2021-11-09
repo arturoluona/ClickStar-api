@@ -25,6 +25,42 @@ router.get(
 )
 
 /*
+ * Get items deleted
+ */
+router.get(
+  '/deletedAll',
+  requireAuth,
+  AuthController.roleAuthorization(['admin']),
+  trimRequest.all,
+  controller.getItemsDeleted
+)
+
+
+/*
+ * Get item deleted
+ */
+router.get(
+  '/deleted/:id',
+  requireAuth,
+  AuthController.roleAuthorization(['admin']),
+  trimRequest.all,
+  validate.getItem,
+  controller.getItemDeleted
+)
+
+/*
+ * Restore item deleted
+ */
+router.get(
+  '/restore/:id',
+  requireAuth,
+  AuthController.roleAuthorization(['admin']),
+  trimRequest.all,
+  validate.getItem,
+  controller.restoreItem
+)
+
+/*
  * Get items route
  */
 router.get(

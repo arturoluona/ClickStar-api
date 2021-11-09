@@ -364,5 +364,52 @@ module.exports = {
         resolve(item)
       })
     })
+  },
+
+  /**
+   * Gets items from database deleted
+   * @param {Object} req - request object
+   * @param {Object} model - query object
+   * @param {Object} query - query object
+   */
+  async getItemsDeleted(req, model, query) {
+    return new Promise((resolve, reject) => {
+      model.findDeleted(query, (err, items) => {
+        if (err) {
+          reject(buildErrObject(422, err.message))
+        }
+        resolve(items)
+      })
+    })
+  },
+
+  /**
+   * Gets item from database by id deleted
+   * @param {string} id - item id
+   * @param {object} model - item id
+   */
+  async getItemDelete(id, model) {
+    return new Promise((resolve, reject) => {
+      model.findDeleted({_id: id}, (err, item) => {
+        itemNotFound(err, item, reject, 'NOT_FOUND')
+        resolve(item)
+      })
+    })
+  },
+
+  /**
+   * Gets item from database by id deleted
+   * @param {string} id - item id
+   * @param {object} model - item id
+   */
+  async restoreItem(id, model) {
+    return new Promise((resolve, reject) => {
+      model.restore({_id: id}, (err, item) => {
+        itemNotFound(err, item, reject, 'NOT_FOUND')
+        resolve(item)
+      })
+    })
   }
+
+
 }

@@ -30,4 +30,5 @@ const deviceOthersSchema = new mongoose.Schema(
   }
 )
 deviceOthersSchema.plugin(mongoosePaginate)
+deviceOthersSchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 module.exports = mongoose.model('deviceOthers', deviceOthersSchema)

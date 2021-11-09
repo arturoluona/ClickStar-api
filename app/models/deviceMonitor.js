@@ -29,4 +29,5 @@ const deviceMonitorSchema = new mongoose.Schema(
   }
 )
 deviceMonitorSchema.plugin(mongoosePaginate)
+deviceMonitorSchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 module.exports = mongoose.model('deviceMonitor', deviceMonitorSchema)

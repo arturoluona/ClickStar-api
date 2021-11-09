@@ -40,6 +40,8 @@ exports.createItem = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
+  check('storage')
+    .optional(),
   (req, res, next) => {
     validationResult(req, res, next)
   }
@@ -84,6 +86,8 @@ exports.updateItem = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
+  check('storage')
+    .optional(),
   check('id')
     .exists()
     .withMessage('MISSING')

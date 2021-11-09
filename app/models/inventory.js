@@ -18,6 +18,9 @@ const inventorySchema = new mongoose.Schema(
     },
     price: {
       type: String
+    },
+    storage: {
+      type: Object
     }
   },
   {
