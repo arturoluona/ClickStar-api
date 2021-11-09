@@ -28,8 +28,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: 'all',
-      after: 'all',
+      method: 'obtener todo'
     }
   }
 
@@ -37,8 +36,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: 'new',
-      after: data,
+      method: 'nuevo'
     }
   }
 
@@ -46,8 +44,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before,
-      after: data,
+      method: 'actualizar',
     }
   }
 
@@ -55,8 +52,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: 'get',
-      after: data,
+      method: 'obtener'
     }
   }
 
@@ -64,8 +60,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: data,
-      after: 'deleted',
+      method: 'eliminar'
     }
   }
 
