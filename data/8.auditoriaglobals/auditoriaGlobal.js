@@ -16,21 +16,8 @@ module.exports = [
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent()
     },
-    before: {
-      _id:  new ObjectID('5fbf0d49ac8acb22bc043a82'),
-      tinta: [
-        'Azul', 'Amarillo', 'Rojo', 'negro'
-      ],
-      model: 'Epson tx111',
-      make: 'EPSON',
-      serial: 'asdfghqwert34567xcvb',
-      cabezal: 'gvybuyb',
-      description: faker.lorem.text(15),
-      createdAt: faker.date.past(),
-      updatedAt: faker.date.recent()
-    },
     route: '/deviceMonitor',
-    after: 'delete',
+    method: 'eliminar',
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
   },
@@ -48,9 +35,8 @@ module.exports = [
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent()
     },
-    before: 'all',
+    method: 'obtener todo',
     route: '/deviceMonitor',
-    after: 'all',
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
   },
@@ -68,21 +54,8 @@ module.exports = [
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent()
     },
-    before: 'get',
+    method: 'obtener',
     route: '/devicePc/5fbf0d49ac8acb22bc043a82',
-    after: {
-      _id:  new ObjectID('5fbf0d49ac8acb22bc043a82'),
-      tinta: [
-        'Azul', 'Amarillo', 'Rojo', 'negro'
-      ],
-      model: 'HP tx111',
-      make: 'HP',
-      serial: 'asdfghqwert34567xcvb',
-      cabezal: 'gvybuyb',
-      description: faker.lorem.text(15),
-      createdAt: faker.date.past(),
-      updatedAt: faker.date.recent()
-    },
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
   },
@@ -100,21 +73,8 @@ module.exports = [
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent()
     },
-    before: 'new',
+    method: 'nuevo',
     route: '/orden',
-    after: {
-      _id:  new ObjectID('5fbf0d49ac8acb22bc043a82'),
-      tinta: [
-        'Azul', 'Amarillo', 'Rojo', 'negro'
-      ],
-      model: 'HP tx111',
-      make: 'HP',
-      serial: 'asdfghqwert34567xcvb',
-      cabezal: 'gvybuyb',
-      description: faker.lorem.text(15),
-      createdAt: faker.date.past(),
-      updatedAt: faker.date.recent()
-    },
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent()
   }

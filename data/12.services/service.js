@@ -10,6 +10,7 @@ module.exports = [
     type: types[0],
     price: 22,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -18,6 +19,7 @@ module.exports = [
     type: types[1],
     price: 22,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -26,6 +28,7 @@ module.exports = [
     type: types[2],
     price: 22,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -34,6 +37,7 @@ module.exports = [
     type: types[3],
     price: 22,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -42,6 +46,7 @@ module.exports = [
     type: types[4],
     price: 22,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -50,6 +55,7 @@ module.exports = [
     type: types[5],
     price: 22,
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   }
 ]

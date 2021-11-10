@@ -10,10 +10,9 @@
 
     <div>
         <table style="
-            margin-left: 7rem !important;
             font-family: 'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;
             font-size: 12px;
-            margin: 45px;
+            margin: auto;
             width: 480px;
             text-align: left;
             border-collapse: collapse;
@@ -21,69 +20,69 @@
             <tr>
                 <th style="
                     text-align: center;
-                    font-size: 13px;     
-                    font-weight: normal;     
-                    padding: 8px;     
+                    font-size: 13px;
+                    font-weight: normal;
+                    padding: 8px;
                     background: #b9c9fe;
-                    border-top: 4px solid #aabcfe;    
-                    border-bottom: 1px solid #fff; 
-                    color: #039; 
+                    border-top: 4px solid #aabcfe;
+                    border-bottom: 1px solid #fff;
+                    color: #039;
                 ">Usuario</th>
                 <th style="
                     text-align: center;
-                    font-size: 13px;     
-                    font-weight: normal;     
-                    padding: 8px;     
+                    font-size: 13px;
+                    font-weight: normal;
+                    padding: 8px;
                     background: #b9c9fe;
-                    border-top: 4px solid #aabcfe;    
-                    border-bottom: 1px solid #fff; 
-                    color: #039; 
+                    border-top: 4px solid #aabcfe;
+                    border-bottom: 1px solid #fff;
+                    color: #039;
                 ">Inventario
                 </th>
                 <th style="
                     text-align: center;
-                    font-size: 13px;     
-                    font-weight: normal;     
-                    padding: 8px;     
+                    font-size: 13px;
+                    font-weight: normal;
+                    padding: 8px;
                     background: #b9c9fe;
-                    border-top: 4px solid #aabcfe;    
-                    border-bottom: 1px solid #fff; 
-                    color: #039; 
+                    border-top: 4px solid #aabcfe;
+                    border-bottom: 1px solid #fff;
+                    color: #039;
                 ">Cantidad</th>
                 <th style="
                     text-align: center;
-                    font-size: 13px;     
-                    font-weight: normal;     
-                    padding: 8px;     
+                    font-size: 13px;
+                    font-weight: normal;
+                    padding: 8px;
                     background: #b9c9fe;
-                    border-top: 4px solid #aabcfe;    
-                    border-bottom: 1px solid #fff; 
-                    color: #039; 
+                    border-top: 4px solid #aabcfe;
+                    border-bottom: 1px solid #fff;
+                    color: #039;
                 ">Fecha</th>
             </tr>
-            
+
             <% for(var i=0; i<data.length; i++) {%>
-            
+
             <tr>
                 <td id="user" style="
-                    padding: 8px;     
-                    background: #e8edff;     
+                    padding: 8px;
+                    background: #e8edff;
                     border-bottom: 1px solid #fff;
-                    color: #669;    
+                    color: #669;
                     border-top: 1px solid transparent;
-                "> 
-                    
+                ">
+
                     <%= data[i].user.name %> <br>
                     <%= data[i].user.email %> <br>
                     <%= data[i].user.role %> <br>
                     <%= data[i].user._id %>
-                    
+
                 </td>
                 <td style="
-                    padding: 8px;     
-                    background: #e8edff;     
+                    padding: 8px;
+                    background: #e8edff;
                     border-bottom: 1px solid #fff;
-                    color: #669;    
+                    color: #669;
                     border-top: 1px solid transparent;
                 ">
                     Id: <%= data[i].inventory._id %> <br>
@@ -94,25 +93,25 @@
                 </td>
                 <td style="
                     text-align: center;
-                    padding: 8px;     
-                    background: #e8edff;     
+                    padding: 8px;
+                    background: #e8edff;
                     border-bottom: 1px solid #fff;
-                    color: #669;    
+                    color: #669;
                     border-top: 1px solid transparent;
                 ">
                     <%= data[i].qty %>
                 </td>
                 <td style="
-                    padding: 8px;     
-                    background: #e8edff;     
+                    padding: 8px;
+                    background: #e8edff;
                     border-bottom: 1px solid #fff;
-                    color: #669;      
+                    color: #669;
                     border-top: 1px solid transparent;
                 ">
                     <%= data[i].createdAt.toLocaleDateString() %>
                 </td>
             </tr>
-        
+
         <% } %>
         </table>
     </div>

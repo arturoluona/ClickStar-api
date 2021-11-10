@@ -57,7 +57,7 @@ exports.auditoriaGlobal = async (req, res) => {
   try {
     const query = await db.checkQueryString(req.query)
     const data = await db.getItems(req, auditoriaGlobal, query)
-    options.orientation = 'landscape'
+    // options.orientation = 'landscape'
     res.render(`${__dirname}/../../templates/auditoriaGlobal.ejs`,{data: data.docs}, (err, html) => {
       pdf.create(html, options).toFile('../../public/pdf/auditoriaGlobal.pdf', function(err, resp) {
         if (err) console.log(err)

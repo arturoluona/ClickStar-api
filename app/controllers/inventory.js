@@ -2,6 +2,7 @@ const model = require('../models/inventory')
 const { matchedData } = require('express-validator')
 const utils = require('../middleware/utils')
 const db = require('../middleware/db')
+const serviceDevice = require("../services/devices")
 
 /********************
  * Public functions *
@@ -100,6 +101,46 @@ exports.deleteItem = async (req, res, next) => {
     const id = await utils.isIDGood(req.id)
     res.status(200).json(await db.deleteItem(id, model, user, originalUrl))
     next()
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+/**
+ * Get items function called by route
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ */
+exports.getItemsDeleted = async (req, res) => {
+  try {
+    const { user, originalUrl } = req
+    const query = await db.checkQueryString(req.query)
+    res.status(200).json(await db.getItemsDeleted(req, model, query))
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+/**
+ * Get item function called by route
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ */
+exports.getItemDeleted = async (req, res) => {
+  try {
+    req = matchedData(req)
+    const id = await utils.isIDGood(req.id)
+    res.status(200).json(await db.getItemDelete(id, model))
+  } catch (error) {
+    utils.handleError(res, error)
+  }
+}
+
+exports.restoreItem = async (req, res) => {
+  try {
+    req = matchedData(req)
+    const id = await utils.isIDGood(req.id)
+    res.status(200).json(await db.restoreItem(id, model))
   } catch (error) {
     utils.handleError(res, error)
   }

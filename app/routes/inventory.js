@@ -21,10 +21,44 @@ const trimRequest = require('trim-request')
 router.get(
   '/',
   requireAuth,
-  AuthController.roleAuthorization(['admin', 'office', 'tecnico']),
   trimRequest.all,
   controller.getItems,
   db.auditoriaMethods
+)
+
+/*
+ * Get items deleted
+ */
+router.get(
+  '/deletedAll',
+  requireAuth,
+  AuthController.roleAuthorization(['admin']),
+  trimRequest.all,
+  controller.getItemsDeleted
+)
+
+/*
+ * Get item deleted
+ */
+router.get(
+  '/deleted/:id',
+  requireAuth,
+  AuthController.roleAuthorization(['admin']),
+  trimRequest.all,
+  validate.getItem,
+  controller.getItemDeleted
+)
+
+/*
+ * Restore item deleted
+ */
+router.get(
+  '/restore/:id',
+  requireAuth,
+  AuthController.roleAuthorization(['admin']),
+  trimRequest.all,
+  validate.getItem,
+  controller.restoreItem
 )
 
 /*

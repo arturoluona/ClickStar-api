@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const mongoose_delete = require('mongoose-delete')
 const aggregatePaginate = require('mongoose-aggregate-paginate-v2')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
@@ -101,5 +102,6 @@ UserSchema.methods.comparePassword = function (passwordAttempt, cb) {
   )
 }
 UserSchema.plugin(aggregatePaginate)
+UserSchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 UserSchema.plugin(mongoosePaginate)
 module.exports = mongoose.model('User', UserSchema)

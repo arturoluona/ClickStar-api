@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoose_delete = require('mongoose-delete')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const devicePrinterSchema = new mongoose.Schema(
@@ -31,4 +32,5 @@ const devicePrinterSchema = new mongoose.Schema(
   }
 )
 devicePrinterSchema.plugin(mongoosePaginate)
+devicePrinterSchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 module.exports = mongoose.model('devicePrinter', devicePrinterSchema)

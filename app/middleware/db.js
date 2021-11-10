@@ -28,8 +28,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: 'all',
-      after: 'all',
+      method: 'obtener todo'
     }
   }
 
@@ -37,8 +36,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: 'new',
-      after: data,
+      method: 'nuevo'
     }
   }
 
@@ -46,8 +44,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before,
-      after: data,
+      method: 'actualizar',
     }
   }
 
@@ -55,8 +52,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: 'get',
-      after: data,
+      method: 'obtener'
     }
   }
 
@@ -64,8 +60,7 @@ const auditGlobal = async (method, route, user, data = {}, before = {}) => {
     send = {
       user,
       route,
-      before: data,
-      after: 'deleted',
+      method: 'eliminar'
     }
   }
 
@@ -346,14 +341,70 @@ module.exports = {
    * @param {string} id - id of item
    */
   async deleteItem(id, model, user, route) {
+    // model.findById(id, (err, item) => {
+    //   auditGlobal('delete', route, user, item)
+    // })
+    // return new Promise((resolve, reject) => {
+    //   model.findByIdAndRemove(id, (err, item) => {
+    //     itemNotFound(err, item, reject, 'NOT_FOUND')
+    //     resolve(buildSuccObject('DELETED'))
+    //   })
+    // })
     model.findById(id, (err, item) => {
       auditGlobal('delete', route, user, item)
     })
     return new Promise((resolve, reject) => {
-      model.findByIdAndRemove(id, (err, item) => {
+      model.deleteById(id, (err, item) => {
+        itemNotFound(err, item, reject, 'DOES_NOT_EXIST')
+        resolve(item)
+      })
+    })
+  },
+
+  /**
+   * Gets items from database deleted
+   * @param {Object} req - request object
+   * @param {Object} model - query object
+   * @param {Object} query - query object
+   */
+  async getItemsDeleted(req, model, query) {
+    return new Promise((resolve, reject) => {
+      model.findDeleted(query, (err, items) => {
+        if (err) {
+          reject(buildErrObject(422, err.message))
+        }
+        resolve(items)
+      })
+    })
+  },
+
+  /**
+   * Gets item from database by id deleted
+   * @param {string} id - item id
+   * @param {object} model - item id
+   */
+  async getItemDelete(id, model) {
+    return new Promise((resolve, reject) => {
+      model.findDeleted({_id: id}, (err, item) => {
         itemNotFound(err, item, reject, 'NOT_FOUND')
-        resolve(buildSuccObject('DELETED'))
+        resolve(item)
+      })
+    })
+  },
+
+  /**
+   * Gets item from database by id deleted
+   * @param {string} id - item id
+   * @param {object} model - item id
+   */
+  async restoreItem(id, model) {
+    return new Promise((resolve, reject) => {
+      model.restore({_id: id}, (err, item) => {
+        itemNotFound(err, item, reject, 'NOT_FOUND')
+        resolve(item)
       })
     })
   }
+
+
 }

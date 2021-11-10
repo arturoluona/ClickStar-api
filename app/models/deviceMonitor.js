@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoose_delete = require('mongoose-delete')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const deviceMonitorSchema = new mongoose.Schema(
@@ -28,4 +29,5 @@ const deviceMonitorSchema = new mongoose.Schema(
   }
 )
 deviceMonitorSchema.plugin(mongoosePaginate)
+deviceMonitorSchema.plugin(mongoose_delete, { overrideMethods: 'all', deletedAt: true })
 module.exports = mongoose.model('deviceMonitor', deviceMonitorSchema)

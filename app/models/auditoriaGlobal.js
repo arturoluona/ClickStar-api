@@ -7,16 +7,12 @@ const auditoriaGlobalSchema = new mongoose.Schema(
       type: Object,
       required: true
     },
-    before: {
-      type: Object,
-      required: true
-    },
     route: {
       type: String,
       required: true
     },
-    after: {
-      type: Object,
+    method: {
+      type: String,
       required: true
     }
   },

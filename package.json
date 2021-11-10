@@ -24,6 +24,7 @@
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "crypto-random-string": "3.0.0",
     "date-fns": "^2.16.1",
     "dotenv-safe": "^8.2.0",
     "ejs": "^3.1.5",
@@ -37,6 +38,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.16",
     "mongoose-aggregate-paginate-v2": "^1.0.42",
+    "mongoose-delete": "^0.5.4",
     "mongoose-paginate-v2": "^1.3.11",
     "morgan": "^1.10.0",
     "nanoid": "^3.1.18",
@@ -46,6 +48,7 @@
     "passport-jwt": "^4.0.0",
     "remark-cli": "^7.0.1",
     "request-ip": "^2.1.3",
+    "sharp": "^0.29.2",
     "trim-request": "^1.0.6",
     "uuid": "^7.0.3",
     "validator": "^13.1.17"
@@ -62,10 +65,12 @@
     "husky": "^4.3.0",
     "mocha": "^7.2.0",
     "mongo-seeding": "^3.5.0",
+    "multer": "^1.4.3",
     "nodemon": "^2.0.6",
     "nyc": "^15.1.0",
     "prettier": "^2.2.0",
-    "prettier-eslint": "^9.0.2"
+    "prettier-eslint": "^9.0.2",
+    "slugify": "^1.6.2"
   },
   "keywords": []
 }

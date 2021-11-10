@@ -15,6 +15,7 @@ module.exports = [
     country: faker.address.streetAddress(true),
     phone: '123123',
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -30,6 +31,7 @@ module.exports = [
     country: faker.address.streetAddress(true),
     phone: '04248764584',
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -45,6 +47,7 @@ module.exports = [
     country: faker.address.streetAddress(true),
     phone: '123123',
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -60,6 +63,7 @@ module.exports = [
     country: faker.address.streetAddress(true),
     phone: '0246987123',
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -75,6 +79,7 @@ module.exports = [
     country: faker.address.streetAddress(true),
     phone: '123123',
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   }
 ]

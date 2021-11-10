@@ -2,10 +2,10 @@ const faker = require('faker')
 const ObjectID = require('mongodb').ObjectID
 
 module.exports = [
-  { 
+  {
     _id:  new ObjectID('5fbf0d49ac8acb22ec043a82'),
     ram: [
-      { 
+      {
         version: 'DDR3',
         capacity: '1GB',
         serial: faker.random.alphaNumeric(9)
@@ -37,6 +37,7 @@ module.exports = [
     battery: faker.random.alphaNumeric(9),
     type: 'laptop',
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   },
   {
@@ -74,6 +75,7 @@ module.exports = [
     battery: faker.random.alphaNumeric(9),
     type: 'cpu',
     createdAt: faker.date.past(),
+    deleted: false,
     updatedAt: faker.date.recent()
   }
 ]
